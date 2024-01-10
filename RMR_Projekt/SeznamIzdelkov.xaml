@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="RMR_Projekt.SeznamIzdelkov"
+             Title=""
+             Shell.NavBarIsVisible="True"
+             Shell.BackgroundColor="Green"
+             BackgroundColor="{DynamicResource background}"
+             >
+    <VerticalStackLayout>
+        <ListView x:Name="list_izdelkov">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <HorizontalStackLayout>
+                        <Image BindingContext="{StaticResource src_slike}" WidthRequest="40" HeightRequest="40" VerticalOptions="Center"></Image>
+                        <Label BindingContext="{StaticResource ime izdelka}" FontSize="15" TextColor="{DynamicResource label_color}" VerticalOptions="Center"></Label>
+                    </HorizontalStackLayout>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+    </VerticalStackLayout>
+</ContentPage>

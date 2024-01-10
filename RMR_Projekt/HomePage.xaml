@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="RMR_Projekt.Views.HomePage"
+             BackgroundColor="{DynamicResource background}">
+
+    <VerticalStackLayout>
+        <Frame BackgroundColor="#A8FF93"
+               HorizontalOptions="Fill"
+               HeightRequest="60"
+               Margin="15"
+               CornerRadius="15">
+            <ImageButton x:Name="search_btn"
+                         HorizontalOptions="EndAndExpand"
+                         Margin="0,0,20,0"
+                         HeightRequest="20"
+                         WidthRequest="20"
+                         VerticalOptions="Center"
+                         Source="search.png"
+                         Aspect="Center">
+            </ImageButton>
+        </Frame>
+
+        <Label x:Name="lbl_hello"
+               Text="Pozdravljeni NikoLazar123!"
+               FontSize="20"
+               VerticalOptions="Start" 
+               HorizontalOptions="Start" 
+               Margin="20,15,15,15"
+               TextColor="{DynamicResource label_color}"/>
+
+        <Button x:Name="alergeni_list"
+                BackgroundColor="#A8FF93"
+                HorizontalOptions="FillAndExpand"
+                HeightRequest="160"
+                Margin="15"
+                CornerRadius="15"
+                Text="MOJI ALERGENI"
+                FontSize="20"
+                TextColor="Black"
+                Clicked="alergeni_list_Clicked"
+               >
+        </Button>
+
+        <Button x:Name="z_alergeni_list"
+                BackgroundColor="#A8FF93"
+                HorizontalOptions="FillAndExpand"
+                HeightRequest="160"
+                Margin="15"
+                CornerRadius="15"
+                Text="IZDELKI Z ALERGENI"
+                FontSize="20"
+                TextColor="Black"
+                Clicked="z_alergeni_list_Clicked"
+               >
+        </Button>
+
+        <Button x:Name="brez_alergenov_list"
+                BackgroundColor="#A8FF93"
+                HorizontalOptions="FillAndExpand"
+                HeightRequest="160"
+                Margin="15"
+                CornerRadius="15"
+                Text="IZDELKI BREZ ALERGENOV"
+                FontSize="20"
+                TextColor="Black"
+                Clicked="brez_alergenov_list_Clicked"
+               >
+        </Button>
+    </VerticalStackLayout>
+</ContentPage>

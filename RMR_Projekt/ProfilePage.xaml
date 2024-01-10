@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="RMR_Projekt.Views.ProfilePage"
+             BackgroundColor="{DynamicResource background}">
+
+
+
+    <VerticalStackLayout>
+    <Grid VerticalOptions="StartAndExpand">
+        <Frame WidthRequest="120" 
+               HeightRequest="120" 
+               CornerRadius="500" 
+               Margin="50,50,50,20"
+               BackgroundColor="#D0FDC5"
+               >
+            <Image x:Name="profile_picture"/>
+        </Frame>
+
+
+            <ImageButton x:Name="edit_ProfilePic_btn" Source="edit.png" WidthRequest="36" HeightRequest="36" Margin="200,50,15,20" CornerRadius="15" Aspect="Center" Padding="2"></ImageButton>
+    </Grid>
+        <Label x:Name="username_lbl" HorizontalOptions="Center"  FontSize="20" TextColor="{DynamicResource label_color}">USERNAME</Label>
+        <HorizontalStackLayout  HorizontalOptions="Center" Margin="10,50,10,0">
+            <Image x:Name="light_mode_btn" Margin="10,0,10,0" VerticalOptions="Center" HorizontalOptions="Start" Source="light.png" Aspect="Center"></Image>
+            <Switch x:Name="dark_light_switch" HorizontalOptions="EndAndExpand" VerticalOptions="Center" OnColor="Green" ThumbColor="Green" Margin="10,0,10,0" Toggled="dark_light_switch_Toggled"></Switch>
+        </HorizontalStackLayout>
+        
+        
+        <HorizontalStackLayout HorizontalOptions="Center" Margin="0,20,0,0">
+            <Border x:Name="img_slo"  WidthRequest="33" HeightRequest="33" BackgroundColor="#A8FF93">
+                <Border.StrokeShape>
+                    <RoundRectangle CornerRadius="15"/>
+                </Border.StrokeShape>
+                <ImageButton  Source="slovenia.png" Clicked="img_slo_Clicked" HeightRequest="35" WidthRequest="35" Padding="3"/>
+            </Border>
+            <Border x:Name="img_eng" WidthRequest="33" HeightRequest="33" BackgroundColor="Transparent">
+                <Border.StrokeShape>
+                    <RoundRectangle CornerRadius="15"/>
+                </Border.StrokeShape>
+                <ImageButton  Source="england.png" Clicked="img_eng_Clicked" HeightRequest="35" WidthRequest="35" Padding="3"/>
+            </Border>
+
+
+        </HorizontalStackLayout>
+
+        
+        
+        <Button Text="LOG OUT" BackgroundColor="Red" Margin="30,50,30,30"></Button>
+
+        
+    </VerticalStackLayout>
+</ContentPage>
