@@ -25,5 +25,10 @@ namespace RMR_Projekt.Views
 
 			
         }
+
+        private void Button_Clicked(object sender, EventArgs e)
+        {
+			myImage.Source = cameraView.GetSnapShot(Camera.MAUI.ImageFormat.PNG);
+        }
     }
 }
