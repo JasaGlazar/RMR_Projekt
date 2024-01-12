@@ -11,4 +11,9 @@ public partial class Prijava : ContentPage
     {
         await Navigation.PushModalAsync(new Registracija());
     }
+
+    private async void prijava_btn_Clicked(object sender, EventArgs e)
+    {
+        await Navigation.PushModalAsync(new AppShell());
+    }
 }

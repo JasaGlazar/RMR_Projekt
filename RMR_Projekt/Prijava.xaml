@@ -13,6 +13,6 @@
             <Entry BackgroundColor="Gray" Placeholder="Password" IsPassword="True" TextColor="White" ></Entry>
         </Frame>
         <Button x:Name="log_btn" HorizontalOptions="Start" Margin="20,0,0,0" Text="Še nimate računa? Registracija" TextColor="Black" Clicked="reg_btn_Clicked" BackgroundColor="White"></Button>
-        <Button Text="PRIJAVA" BackgroundColor="#B5FFA3" Margin="80,50,80,10" CornerRadius="10"></Button>
+        <Button x:Name="prijava_btn" Clicked="prijava_btn_Clicked" Text="PRIJAVA" BackgroundColor="#B5FFA3" Margin="80,50,80,10" CornerRadius="10"></Button>
     </VerticalStackLayout>
 </ContentPage>
