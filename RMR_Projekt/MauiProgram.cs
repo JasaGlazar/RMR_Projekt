@@ -15,6 +15,8 @@ namespace RMR_Projekt
                     fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
                 });
 
+
+
 #if DEBUG
 		builder.Logging.AddDebug();
 #endif
