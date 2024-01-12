@@ -6,29 +6,6 @@
              >
     <Grid>
 
-
-
-        <ScrollView>
-            <VerticalStackLayout VerticalOptions="Center" HorizontalOptions="Center">
-                <cv:CameraView x:Name="cameraView" WidthRequest="350" HeightRequest="180" CamerasLoaded="cameraView_CamerasLoaded" BarCodeDetectionEnabled="True">
-                    
-                </cv:CameraView>
-            </VerticalStackLayout>
-        </ScrollView>
-        <Rectangle 
-            Background="transparent"
-            Stroke="green"
-            StrokeThickness="5"
-            VerticalOptions="Center"
-            HorizontalOptions="Center"
-            HeightRequest="180"
-            WidthRequest="320"></Rectangle>
-
-
-
-
-
-
         <ScrollView>
             <VerticalStackLayout Spacing="25" Padding="30" VerticalOptions="Center">
                 <cv:CameraView x:Name="cameraView" WidthRequest="300" HeightRequest="200" CamerasLoaded="cameraView_CamerasLoaded" BarCodeDetectionEnabled="True">

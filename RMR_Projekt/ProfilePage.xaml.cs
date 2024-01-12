@@ -34,6 +34,7 @@ namespace RMR_Projekt.Views
                 light_mode_btn.Source = ImageSource.FromFile("dark.png");
                 edit_ProfilePic_btn.Source = ImageSource.FromFile("beli_edit.png");
                 is_dark_on = true;
+                Preferences.Set("dark",true);
                 ICollection<ResourceDictionary> mergedDictionaries = Application.Current.Resources.MergedDictionaries;
                 if (mergedDictionaries != null)
                 {
@@ -46,6 +47,7 @@ namespace RMR_Projekt.Views
                 light_mode_btn.Source = ImageSource.FromFile("light.png");
                 edit_ProfilePic_btn.Source = ImageSource.FromFile("edit.png");
                 is_dark_on = false;
+                Preferences.Set("dark", false);
                 ICollection<ResourceDictionary> mergedDictionaries = Application.Current.Resources.MergedDictionaries;
                 if (mergedDictionaries != null)
                 {
@@ -53,6 +55,11 @@ namespace RMR_Projekt.Views
                     mergedDictionaries.Add(new RMR_Projekt.Resources.Styles.Light());
                 }
             }
+        }
+
+        private async void logout_btn_Clicked(object sender, EventArgs e)
+        {
+            await Navigation.PushAsync(new Prijava());
         }
     }
 }
