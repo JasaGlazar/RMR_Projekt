@@ -8,5 +8,7 @@ namespace RMR_Projekt
 {
     public class Izdelek
     {
+       
+
     }
 }
