@@ -11,11 +11,11 @@
             <Entry x:Name="email_entry" Placeholder="Email" Text="{Binding Email}"></Entry>
         </Frame>
         <Frame CornerRadius="15" Margin="10,10,10,5" WidthRequest="320" BackgroundColor="Gray">
-            <Entry BackgroundColor="Gray" Placeholder="Password" IsPassword="True" TextColor="White" ></Entry>
+            <Entry x:Name="pass_entry" BackgroundColor="Gray" Placeholder="Password" IsPassword="True" TextColor="White" Text="{Binding Geslo}" ></Entry>
         </Frame>
         <StackLayout Orientation="Horizontal" Margin="30,0,0,0">
-            <Label Text="Še nimate računa?" TextColor="Black"></Label>
-            <Label Text=" Registracija" TextColor="#B5FFA3">
+            <Label x:Name="noAccount" Text="Še nimate računa?" TextColor="Black"></Label>
+            <Label x:Name="RegisterButton" Text=" Registracija" TextColor="#B5FFA3">
                 <Label.GestureRecognizers>
                     <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped"/>
                 </Label.GestureRecognizers>
