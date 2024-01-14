@@ -13,4 +13,9 @@ public partial class Registracija : ContentPage
         await Navigation.PushModalAsync(new Prijava());
     }
 
+    private async void TapGestureRecognizer_Tapped(object sender, TappedEventArgs e)
+    {
+        await Navigation.PushModalAsync(new Prijava());
+
+    }
 }

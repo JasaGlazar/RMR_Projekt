@@ -31,7 +31,6 @@ namespace RMR_Projekt.Views
 
         private void cameraView_BarcodeDetected(object sender, Camera.MAUI.ZXingHelper.BarcodeEventArgs args)
         {
-
 			MainThread.BeginInvokeOnMainThread(() =>
 			{
 				barcodeResult.Text = $"{args.Result[0].Text}";
