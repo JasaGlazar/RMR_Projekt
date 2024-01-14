@@ -6,7 +6,10 @@ public partial class Prijava : ContentPage
 	public Prijava()
 	{
 		InitializeComponent();
-        preveri_jezik();
+        if(Preferences.Get("dark",false) == true){
+            error_lbl.Text = "dela";
+        }
+        BindingContext = new ViewModels.PrijavaViewModel(Navigation);
     }
 
     private async void reg_btn_Clicked(object sender, EventArgs e)
@@ -14,9 +17,9 @@ public partial class Prijava : ContentPage
         await Navigation.PushModalAsync(new Registracija());
     }
 
-    private async void prijava_btn_Clicked(object sender, EventArgs e)
+    private async void TapGestureRecognizer_Tapped(object sender, TappedEventArgs e)
     {
-        await Navigation.PushModalAsync(new AppShell());
+        await Navigation.PushModalAsync(new Registracija());
     }
 
     private void img_slo_Clicked(object sender, EventArgs e)
@@ -43,8 +46,9 @@ public partial class Prijava : ContentPage
             img_eng.BackgroundColor = Color.FromArgb("#a8ff93");
             img_slo.BackgroundColor = Color.FromRgba(0, 0, 0, 0);
             prijava_btn.Text = "Log in";
-            log_btn.Text = "No account? Register";
-            username_entry.Placeholder = "Username";
+            noAccount.Text = "No account?";
+            RegisterButton.Text = "Register";
+            email_entry.Placeholder = "Username";
             pass_entry.Placeholder = "Password";
         } 
         else
@@ -52,8 +56,9 @@ public partial class Prijava : ContentPage
             img_slo.BackgroundColor = Color.FromArgb("#a8ff93");
             img_eng.BackgroundColor = Color.FromRgba(0, 0, 0, 0);
             prijava_btn.Text = "Prijava";
-            log_btn.Text = "Še nimate racuna? Registracija";
-            username_entry.Placeholder = "Uporabniško ime";
+            noAccount.Text = "Še nimate racuna?";
+            RegisterButton.Text = "Registracija";
+            email_entry.Placeholder = "Uporabniško ime";
             pass_entry.Placeholder = "Geslo";
         }
     }

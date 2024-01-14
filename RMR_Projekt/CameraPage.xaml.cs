@@ -1,5 +1,3 @@
-
-
 using Microsoft.Maui.ApplicationModel;
 
 namespace RMR_Projekt.Views
@@ -29,6 +27,15 @@ namespace RMR_Projekt.Views
         private void Button_Clicked(object sender, EventArgs e)
         {
 			myImage.Source = cameraView.GetSnapShot(Camera.MAUI.ImageFormat.PNG);
+        }
+
+        private void cameraView_BarcodeDetected(object sender, Camera.MAUI.ZXingHelper.BarcodeEventArgs args)
+        {
+
+			MainThread.BeginInvokeOnMainThread(() =>
+			{
+				barcodeResult.Text = $"{args.Result[0].Text}";
+            });
         }
     }
 }

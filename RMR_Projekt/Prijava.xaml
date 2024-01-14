@@ -6,15 +6,22 @@
     <Grid>
     <VerticalStackLayout VerticalOptions="Start" Margin="10">
         <Image Source="temnilogo.png" WidthRequest="120" HeightRequest="120" Margin="40"></Image>
-        <Label x:Name="error_lbl" TextColor="Red" Margin="30,50,10,5">napacno geslo</Label>
+        <Label x:Name="error_lbl" TextColor="Red" Margin="30,50,10,5"></Label>
         <Frame CornerRadius="15" Margin="10" WidthRequest="320">
-            <Entry x:Name="username_entry" Placeholder="Username"></Entry>
+            <Entry x:Name="email_entry" Placeholder="Email" Text="{Binding Email}"></Entry>
         </Frame>
         <Frame CornerRadius="15" Margin="10,10,10,5" WidthRequest="320" BackgroundColor="Gray">
-            <Entry x:Name="pass_entry" BackgroundColor="Gray" Placeholder="Password" IsPassword="True" TextColor="White" ></Entry>
+            <Entry x:Name="pass_entry" BackgroundColor="Gray" Placeholder="Password" IsPassword="True" TextColor="White" Text="{Binding Geslo}" ></Entry>
         </Frame>
-        <Button x:Name="log_btn" HorizontalOptions="Start" Margin="20,0,0,0" Text="Še nimate računa? Registracija" TextColor="Black" Clicked="reg_btn_Clicked" BackgroundColor="White"></Button>
-        <Button x:Name="prijava_btn" Clicked="prijava_btn_Clicked" Text="PRIJAVA" BackgroundColor="#B5FFA3" Margin="80,50,80,10" CornerRadius="10"></Button>
+        <StackLayout Orientation="Horizontal" Margin="30,0,0,0">
+            <Label x:Name="noAccount" Text="Še nimate računa?" TextColor="Black"></Label>
+            <Label x:Name="RegisterButton" Text=" Registracija" TextColor="#B5FFA3">
+                <Label.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped"/>
+                </Label.GestureRecognizers>
+            </Label>
+        </StackLayout>
+        <Button x:Name="prijava_btn" Command="{Binding PrijavaBtn}" Text="Prijava" BackgroundColor="#B5FFA3" Margin="80,50,80,10" CornerRadius="10"></Button>
     </VerticalStackLayout>
         <HorizontalStackLayout HorizontalOptions="Center" Margin="0,20,0,10" VerticalOptions="End">
             <Border x:Name="img_slo"  WidthRequest="33" HeightRequest="33" BackgroundColor="#A8FF93">
