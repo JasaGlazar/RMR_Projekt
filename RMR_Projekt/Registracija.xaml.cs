@@ -4,7 +4,8 @@ public partial class Registracija : ContentPage
 {
 	public Registracija()
 	{
-		InitializeComponent();
+        InitializeComponent();
+        BindingContext = new ViewModels.RegistracijaViewModel(Navigation);
 	}
 
     private async void log_btn_Clicked(object sender, EventArgs e)

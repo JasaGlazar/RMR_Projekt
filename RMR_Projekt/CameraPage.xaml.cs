@@ -1,5 +1,3 @@
-
-
 using Microsoft.Maui.ApplicationModel;
 
 namespace RMR_Projekt.Views
