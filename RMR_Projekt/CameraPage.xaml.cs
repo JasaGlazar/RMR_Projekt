@@ -29,7 +29,7 @@ namespace RMR_Projekt.Views
 
 			string apiPath = "https://world.openfoodfacts.org/api/v2/product/";
 			//var number = barcodeResult.Text.Trim();
-			var numberTest = "5010477348678";
+			var numberTest = "8000500357729";
 
 
             string json = await GetJsonAsync($"{apiPath}{numberTest}.json");
@@ -40,10 +40,27 @@ namespace RMR_Projekt.Views
                 // Deserialize the JSON into a ProductInfo object
                 ProductInfo productInfo = JsonConvert.DeserializeObject<ProductInfo>(json);
 
-                /*
-                     V productInfo mamo zaj podatke ki smo jih pridobili s skeniranjem, na podlagi tega se morajo izpisati alergeni
+                var allergens = productInfo.product.allergens_hierarchy;
 
-                 */
+                List<string> modifiedAllergens = new List<string>();
+
+                foreach (var allergen in allergens)
+                {
+                    // Find the position of ":" and remove everything before it
+                    int colonIndex = allergen.IndexOf(':');
+                    string modifiedAllergen = colonIndex != -1 ? allergen.Substring(colonIndex + 1) : allergen;
+
+                    // Add the modified allergen to the new list
+                    modifiedAllergens.Add(modifiedAllergen);
+                }
+
+                // Isto se naredi za sestavine produkta
+                // Posodib json pa classe da bodo shranejvali hranilne vrednosti za graf -> Borba za èetrtek
+
+                // Save the modified allergens list back to product.allergens_hierarchy
+                productInfo.product.allergens_hierarchy = modifiedAllergens;
+
+
                 using (HttpClient client = new HttpClient())
                 {
                     // Convert ProductInfo to JSON
