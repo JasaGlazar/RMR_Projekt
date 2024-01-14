@@ -22,6 +22,11 @@ namespace RMR_Projekt.ViewModels
 
         private string geslo;
 
+        private string gesloConfirm;
+
+        private string errorLbl;
+
+
         public string Email
         {
             get => email;
@@ -40,6 +45,26 @@ namespace RMR_Projekt.ViewModels
                 RaisePropertyChanged("Geslo");
             }
         }
+
+        public string GesloConfirm
+        {
+            get => gesloConfirm;
+            set
+            {
+                gesloConfirm = value;
+                RaisePropertyChanged("GesloConfirm");
+            }
+        }
+
+        public string ErrorLbl
+        {
+            get => errorLbl;
+            set
+            {
+                errorLbl = value;
+                RaisePropertyChanged("ErrorLbl");
+            }
+        }
         private void RaisePropertyChanged(string v)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(v));
@@ -56,6 +81,13 @@ namespace RMR_Projekt.ViewModels
         {
             try
             {
+
+                if(!ComparePassword(Geslo, GesloConfirm))
+                {
+                    await App.Current.MainPage.DisplayAlert("Napaka", "Gesla se ne ujemata", "OK");
+                    return;
+                }
+
                 FirebaseAuthProvider firebaseAuthProvider = new FirebaseAuthProvider(new FirebaseConfig(webApiKey));
                 FirebaseAuthLink auth = await firebaseAuthProvider.CreateUserWithEmailAndPasswordAsync(Email, Geslo);
 
@@ -87,8 +119,8 @@ namespace RMR_Projekt.ViewModels
                     errorMessage = "Vnesite geslo";
                 }
 
-
                 await App.Current.MainPage.DisplayAlert("Napaka", errorMessage, "OK");
+                ErrorLbl = errorMessage;
 
             }
             catch (Exception ex)
@@ -96,6 +128,11 @@ namespace RMR_Projekt.ViewModels
                 await App.Current.MainPage.DisplayAlert("Opozorilo", "Nepričakovana napaka", "OK");
                 throw;
             }
+        }
+
+        public static bool ComparePassword(string geslo, string confirmGeslo)
+        {
+            return geslo.Equals(confirmGeslo);
         }
     }
 }

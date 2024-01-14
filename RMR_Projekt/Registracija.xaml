@@ -2,20 +2,28 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="RMR_Projekt.Registracija"
-             Title="Registracija">
+             Title="Registracija"
+             BindingContext="{Binding RegistracijaViewModel}">
     <VerticalStackLayout VerticalOptions="Start" Margin="10">
         <Image Source="temnilogo.png" WidthRequest="120" HeightRequest="120" Margin="40"></Image>
-        <Label x:Name="error_lbl" TextColor="Red" Margin="30,50,10,5">napacno geslo</Label>
+        <Label x:Name="error_lbl" TextColor="Red" Margin="30,50,10,5" Text="{Binding ErrorLbl}"></Label>
         <Frame CornerRadius="15" Margin="10" WidthRequest="320" >
-            <Entry x:Name="username_entry" Placeholder="Username"></Entry>
+            <Entry x:Name="email_entry" Placeholder="Email" Text="{Binding Email}"></Entry>
         </Frame >
         <Frame CornerRadius="15" Margin="10,10,10,5" WidthRequest="320" BackgroundColor="Gray">
-            <Entry BackgroundColor="Gray" Placeholder="Password" IsPassword="True" TextColor="White" ></Entry>
+            <Entry BackgroundColor="Gray" Placeholder="Password" Text="{Binding Geslo}"  IsPassword="True" TextColor="White" ></Entry>
         </Frame >
         <Frame CornerRadius="15" Margin="10,10,10,5" WidthRequest="320" BackgroundColor="Gray">
-            <Entry BackgroundColor="Gray" Placeholder="Confirm Password" IsPassword="True" TextColor="White" ></Entry>
+            <Entry BackgroundColor="Gray" Placeholder="Confirm Password" IsPassword="True" TextColor="White" Text="{Binding GesloConfirm}"></Entry>
         </Frame >
-        <Button x:Name="log_btn" HorizontalOptions="Start" Margin="20,0,0,0" Text="Že imate račun? Prijava" TextColor="Black" Clicked="log_btn_Clicked" BackgroundColor="White"></Button>
-        <Button Text="NAPREJ" BackgroundColor="#B5FFA3" Margin="80,50,80,10" CornerRadius="10"></Button>
+        <StackLayout Orientation="Horizontal" Margin="30,0,0,0">
+            <Label Text="Že imate račun?" TextColor="Black"></Label>
+            <Label Text=" Prijava" TextColor="#B5FFA3">
+                <Label.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped"/>
+                </Label.GestureRecognizers>
+            </Label>
+        </StackLayout>
+        <Button Text="Registriraj se" Command="{Binding RegistracijaUporabnika}" BackgroundColor="#B5FFA3" Margin="80,50,80,10" CornerRadius="10"></Button>
     </VerticalStackLayout>
 </ContentPage>
