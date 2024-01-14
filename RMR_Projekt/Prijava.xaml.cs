@@ -57,4 +57,33 @@ public partial class Prijava : ContentPage
             pass_entry.Placeholder = "Geslo";
         }
     }
+
+    private void lightmode_btn_Clicked(object sender, EventArgs e)
+    {
+        preveri_lightmode();
+    }
+
+    private void preveri_lightmode()
+    {
+        if (Preferences.Get("dark", false) == false)
+        {
+            Preferences.Set("dark", true);
+            ICollection<ResourceDictionary> mergedDictionaries = Application.Current.Resources.MergedDictionaries;
+            if (mergedDictionaries != null)
+            {
+                mergedDictionaries.Clear();
+                mergedDictionaries.Add(new RMR_Projekt.Resources.Styles.Dark());
+            }
+        }
+        else
+        {
+            Preferences.Set("dark", false);
+            ICollection<ResourceDictionary> mergedDictionaries = Application.Current.Resources.MergedDictionaries;
+            if (mergedDictionaries != null)
+            {
+                mergedDictionaries.Clear();
+                mergedDictionaries.Add(new RMR_Projekt.Resources.Styles.Light());
+            }
+        }
+    }
 }

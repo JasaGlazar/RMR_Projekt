@@ -6,7 +6,7 @@
     <Grid>
     <VerticalStackLayout VerticalOptions="Start" Margin="10">
         <Image Source="temnilogo.png" WidthRequest="120" HeightRequest="120" Margin="40"></Image>
-        <Label x:Name="error_lbl" TextColor="Red" Margin="30,50,10,5">napacno geslo</Label>
+            <Label x:Name="error_lbl" TextColor="Red" Margin="30,50,10,5"></Label>
         <Frame CornerRadius="15" Margin="10" WidthRequest="320" >
             <Entry x:Name="username_entry" Placeholder="Username"></Entry>
         </Frame >
