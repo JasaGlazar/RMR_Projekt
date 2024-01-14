@@ -20,7 +20,7 @@
 
                 <Button Text="JasasPP" Clicked="Button_Clicked" ></Button>
 
-                <Image x:Name="myImage" WidthRequest="200" HeightRequest="200" ></Image>
+                
 
             </VerticalStackLayout>
         </ScrollView>

@@ -27,8 +27,8 @@ namespace RMR_Projekt.Views
         {
 
 			string apiPath = "https://world.openfoodfacts.org/api/v2/product/";
-			var number = barcodeResult.Text.Trim();
-			var numberTest = "product/8000500357729";
+			//var number = barcodeResult.Text.Trim();
+			var numberTest = "5010477348678";
 
 
             string json = await GetJsonAsync($"{apiPath}{numberTest}.json");
@@ -39,17 +39,10 @@ namespace RMR_Projekt.Views
                 // Deserialize the JSON into a ProductInfo object
                 ProductInfo productInfo = JsonConvert.DeserializeObject<ProductInfo>(json);
 
-                // Extract information from the ProductInfo object
-                string productNumber = productInfo.Code;
-                List<string> ingredients = productInfo.Product.IngredientsText?.Split(',').Select(i => i.Trim()).ToList() ?? new List<string>();
-                List<string> allergens = productInfo.Product.AllergensTags ?? new List<string>();
-                string imageSource = productInfo.Product.ImageUrl;
-
-                // Now you can use the extracted information as needed
-                Console.WriteLine($"Product Number: {productNumber}");
-                Console.WriteLine($"Ingredients: {string.Join(", ", ingredients)}");
-                Console.WriteLine($"Allergens: {string.Join(", ", allergens)}");
-                Console.WriteLine($"Image Source: {imageSource}");
+               /*
+                    V productInfo mamo zaj podatke ki smo jih pridobili s skeniranjem, na podlagi tega se morajo izpisati alergeni
+                
+                */
             }
             else
             {
@@ -101,14 +94,15 @@ namespace RMR_Projekt.Views
     public class ProductInfo
     {
         public string Code { get; set; }
-        public ProductDetails Product { get; set; }
+        public product product { get; set; }
     }
 
-    public class ProductDetails
+    public class product
     {
-        public string IngredientsText { get; set; }
-        public List<string> AllergensTags { get; set; }
-        public string ImageUrl { get; set; }
+        public List<string> allergens_hierarchy { get; set; }
+        public string image_url { get; set; }
+        public List<string> ingredients_hierarchy { get; set; }
+
     }
 
 
