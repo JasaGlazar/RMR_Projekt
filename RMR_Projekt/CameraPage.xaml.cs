@@ -1,5 +1,6 @@
 using Microsoft.Maui.ApplicationModel;
 using Newtonsoft.Json;
+using System.Text;
 
 namespace RMR_Projekt.Views
 {
@@ -39,11 +40,42 @@ namespace RMR_Projekt.Views
                 // Deserialize the JSON into a ProductInfo object
                 ProductInfo productInfo = JsonConvert.DeserializeObject<ProductInfo>(json);
 
-               /*
-                    V productInfo mamo zaj podatke ki smo jih pridobili s skeniranjem, na podlagi tega se morajo izpisati alergeni
-                
-                */
-            }
+                /*
+                     V productInfo mamo zaj podatke ki smo jih pridobili s skeniranjem, na podlagi tega se morajo izpisati alergeni
+
+                 */
+                using (HttpClient client = new HttpClient())
+                {
+                    // Convert ProductInfo to JSON
+                    string contentJson = JsonConvert.SerializeObject(productInfo);
+
+                    // Specify the Firebase Realtime Database URL and the node to post to
+                    string firebaseUrl = "https://rmr-projekt-a8434-default-rtdb.europe-west1.firebasedatabase.app/";
+                    string firebaseNode = "ProductInfo/";
+
+                    // Build the URL for the POST request
+                    string requestUrl = $"{firebaseUrl}{firebaseNode}.json";
+
+                    // Create a StringContent with the JSON data
+                    StringContent content = new StringContent(contentJson, Encoding.UTF8, "application/json");
+
+                    // Send the POST request
+                    var response = await client.PostAsync(requestUrl, content);
+
+                    // Check if the request was successful (status code 200-299)
+                    if (response.IsSuccessStatusCode)
+                    {
+                        // Successfully posted the data
+                        Console.WriteLine("Data posted successfully!");
+                    }
+                    else
+                    {
+                        // Handle the error
+                        Console.WriteLine($"Error: {response.StatusCode} - {response.ReasonPhrase}");
+                    }
+
+                }
+                }
             else
             {
                 // Handle the case where JSON is not available or invalid
@@ -81,6 +113,9 @@ namespace RMR_Projekt.Views
             }
         }
 
+
+
+
         private void cameraView_BarcodeDetected(object sender, Camera.MAUI.ZXingHelper.BarcodeEventArgs args)
         {
 			MainThread.BeginInvokeOnMainThread(() =>
@@ -104,8 +139,5 @@ namespace RMR_Projekt.Views
         public List<string> ingredients_hierarchy { get; set; }
 
     }
-
-
-
 
 }
