@@ -9,7 +9,7 @@
     TabBarUnselectedColor ="Black"
     TabBarTitleColor="White"
     Shell.NavBarIsVisible="False">
-
+    
     <TabBar >
         <Tab Title="Home"
             Icon="Home.png">

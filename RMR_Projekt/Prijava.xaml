@@ -34,7 +34,7 @@
                 <Border.StrokeShape>
                     <RoundRectangle CornerRadius="15"/>
                 </Border.StrokeShape>
-                <ImageButton  Source="england.png" Clicked="img_eng_Clicked" HeightRequest="35" WidthRequest="35" Padding="3"/>
+                <ImageButton Source="england.png" Clicked="img_eng_Clicked" HeightRequest="35" WidthRequest="35" Padding="3"/>
             </Border>
         </HorizontalStackLayout>
         <ImageButton x:Name="lightmode_btn" Clicked="lightmode_btn_Clicked" Source="dark.png" BackgroundColor="#242523" Aspect="Center"  HeightRequest="25" WidthRequest="25" CornerRadius="13" VerticalOptions="End" HorizontalOptions="End" Margin="10"/>
