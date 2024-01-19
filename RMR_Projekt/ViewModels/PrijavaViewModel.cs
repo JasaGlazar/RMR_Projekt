@@ -61,7 +61,7 @@ namespace RMR_Projekt.ViewModels
                 FirebaseAuthLink vsebina = await auth.GetFreshAuthAsync();
 
                 var serializiranaVsebina = JsonConvert.SerializeObject(vsebina);
-                Preferences.Set("SvezToken", serializiranaVsebina);
+                Preferences.Set("PrijavaToken", serializiranaVsebina);
                 await this._navigation.PushModalAsync(new AppShell());
             }
             catch (FirebaseAuthException ex)

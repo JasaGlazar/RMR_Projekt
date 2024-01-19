@@ -50,7 +50,6 @@ namespace RMR_Projekt.Views
             moji_alergeni.Add(new Izdelek("https://domf5oio6qrcr.cloudfront.net/medialibrary/6195/conversions/17f1f1f9-da43-405a-b3b4-4d1fcb5cec51-thumb.jpg", "Sesame seeds"));
             moji_alergeni.Add(new Izdelek("https://thumbs.dreamstime.com/z/crustacean-vector-crab-prawns-ocean-lobster-crawfish-crayfish-seafood-illustration-crustaceans-set-sea-animals-shrimp-137353529.jpg", "Crustaceans"));
             moji_alergeni.Add(new Izdelek("https://i.pinimg.com/564x/ed/c0/06/edc006388218e2c6caff7a75a3263e34.jpg", "Molluscs"));
-
         }
 
         private async void izberi_jezik(string slo,string eng,List<Izdelek> seznam)

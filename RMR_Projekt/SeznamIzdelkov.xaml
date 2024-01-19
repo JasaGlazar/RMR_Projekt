@@ -18,11 +18,13 @@
                             </Grid.ColumnDefinitions>
                             <Image Source="{Binding src_slike}" WidthRequest="50" HeightRequest="50" VerticalOptions="Center" Margin="10" Grid.Column="0"></Image>
                             <Label Text="{Binding ime}" FontSize="15" TextColor="{DynamicResource label_color}" Grid.Column="1" VerticalOptions="Center" Margin="10,0,0,0" HorizontalOptions="StartAndExpand"></Label>
-                            <CheckBox BackgroundColor="{DynamicResource background}" VerticalOptions="Center" Color="Green" Grid.Column="2" Margin="0,0,10,0"></CheckBox>
+                            <CheckBox IsChecked="{Binding IsSelected}" BackgroundColor="{DynamicResource background}" VerticalOptions="Center" Color="Green" Grid.Column="2" Margin="0,0,10,0"></CheckBox>
                         </Grid>
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
             </CollectionView>
+
+            <Button Text="Save" Clicked="Button_Clicked" HorizontalOptions="CenterAndExpand" BackgroundColor="Green" TextColor="White" Grid.Column="2" VerticalOptions="Center" Margin="10"/>
         </VerticalStackLayout>
     </ScrollView>
 </ContentPage>
