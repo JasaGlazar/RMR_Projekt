@@ -67,6 +67,7 @@ namespace RMR_Projekt.Views
                     Label l = new Label();
                     l.Text = product;
                     alergeni_list.Add(l);
+                    l.SetDynamicResource(Label.TextColorProperty, "label_color");
                 }
 
             }
@@ -227,17 +228,6 @@ namespace RMR_Projekt.Views
             });
         }
 
-        public void preveri_barvo_alergenov()
-        {
-            if (Preferences.Get("is_dark", false) == true)
-            {
-
-            }
-            else
-            {
-
-            }
-        }
     }
 
     // Define classes to represent the structure of the JSON data

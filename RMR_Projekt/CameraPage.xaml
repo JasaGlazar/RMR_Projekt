@@ -15,8 +15,8 @@
         </cv:CameraView>
 
         <ScrollView Grid.Row="1" Margin="0,30,0,0">
-            <VerticalStackLayout HorizontalOptions="Center">
-                <Image x:Name="product_image" Aspect="Center" WidthRequest="150" HeightRequest="150"/>
+            <VerticalStackLayout HorizontalOptions="CenterAndExpand">
+                <Image x:Name="product_image" Aspect="Fill" WidthRequest="150" HeightRequest="150"/>
                 <Label x:Name="product_name" TextColor="{DynamicResource label_color}"></Label>
                 <Label TextColor="{DynamicResource label_color}">Alergeni:</Label>
                 <StackLayout x:Name="alergeni_list"></StackLayout>
