@@ -5,25 +5,27 @@
              xmlns:cv="clr-namespace:Camera.MAUI;assembly=Camera.MAUI"
              >
     <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="250"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
 
-        <ScrollView>
+        <cv:CameraView x:Name="cameraView" WidthRequest="300" HeightRequest="200" CamerasLoaded="cameraView_CamerasLoaded" BarCodeDetectionEnabled="True" BarcodeDetected="cameraView_BarcodeDetected">
+        </cv:CameraView>
 
-            
-            
-            <VerticalStackLayout Spacing="25" Padding="30" VerticalOptions="Center">
+        <ScrollView Grid.Row="1" Margin="0,30,0,0">
+            <VerticalStackLayout HorizontalOptions="Center">
+                <Image x:Name="product_image" Aspect="Center"  WidthRequest="150" HeightRequest="150"/>
+                <Label x:Name="product_name"></Label>
+                <Label>Alergeni</Label>
+                <StackLayout x:Name="alergeni_list"></StackLayout>
+            </VerticalStackLayout>
+        </ScrollView>
 
-                <Label x:Name="barcodeResult" FontSize="20"></Label>
-
-                <cv:CameraView x:Name="cameraView" WidthRequest="300" HeightRequest="200" CamerasLoaded="cameraView_CamerasLoaded" BarCodeDetectionEnabled="True" BarcodeDetected="cameraView_BarcodeDetected">
-
-                </cv:CameraView>
-
-                <Button Text="JasasPP" Clicked="Button_Clicked" ></Button>
 
                 
 
-            </VerticalStackLayout>
-        </ScrollView>
+
 
     </Grid>
 </ContentPage>

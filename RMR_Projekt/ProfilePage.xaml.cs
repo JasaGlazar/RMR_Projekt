@@ -15,6 +15,7 @@ namespace RMR_Projekt.Views
         {
             img_slo.BackgroundColor = Color.FromArgb("#a8ff93");
             img_eng.BackgroundColor = Color.FromRgba(0, 0, 0, 0);
+            Preferences.Set("is_eng",false);
             is_eng_on = false;
         }
 
@@ -23,6 +24,7 @@ namespace RMR_Projekt.Views
 
             img_eng.BackgroundColor = Color.FromArgb("#a8ff93");
             img_slo.BackgroundColor = Color.FromRgba(0, 0, 0, 0);
+            Preferences.Set("is_eng", true);
             is_eng_on = true;
         }
 
