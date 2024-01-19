@@ -17,7 +17,6 @@ namespace RMR_Projekt.Views
 			{
 				cameraView.Camera = cameraView.Cameras.First();
 				MainThread.BeginInvokeOnMainThread(async () => { 
-				
 					await cameraView.StopCameraAsync();
 					await cameraView.StartCameraAsync();
 				});
@@ -72,7 +71,7 @@ namespace RMR_Projekt.Views
 
         }
 
-        private async void Firebase(ProductInfo productInfo)
+        private async void FirebasePOST(ProductInfo productInfo)
         {
             using (HttpClient client = new HttpClient())
             {
@@ -213,14 +212,12 @@ namespace RMR_Projekt.Views
         }
 
 
-
-
         private void cameraView_BarcodeDetected(object sender, Camera.MAUI.ZXingHelper.BarcodeEventArgs args)
         {
 			MainThread.BeginInvokeOnMainThread(() =>
 			{
-				barcodeResult.Text = $"{args.Result[0].Text}";
-                ApiCall(barcodeResult.Text);
+				//barcodeResult.Text = $"{args.Result[0].Text}";
+                ApiCall(args.Result[0].Text);
             });
         }
     }

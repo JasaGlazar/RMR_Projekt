@@ -9,6 +9,7 @@ namespace RMR_Projekt.Views
 		public ProfilePage()
 		{
 			InitializeComponent();
+            BindingContext = new ViewModels.ProfilePageViewModel(Navigation);
 		}
 
         private void img_slo_Clicked(object sender, EventArgs e)
@@ -57,9 +58,9 @@ namespace RMR_Projekt.Views
             }
         }
 
-        private async void logout_btn_Clicked(object sender, EventArgs e)
-        {
-            await Navigation.PushAsync(new Prijava());
-        }
+        //private async void logout_btn_Clicked(object sender, EventArgs e)
+        //{
+            //await Navigation.PushAsync(new Prijava());
+        //}
     }
 }

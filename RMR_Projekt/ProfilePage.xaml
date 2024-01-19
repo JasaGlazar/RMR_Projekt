@@ -44,9 +44,9 @@
 
         </HorizontalStackLayout>
 
-        
-        
-        <Button Text="LOG OUT" BackgroundColor="Red" Margin="30,50,30,30" x:Name="logout_btn" Clicked="logout_btn_Clicked"></Button>
+
+
+        <Button Text="LOG OUT" BackgroundColor="Red" Margin="30,50,30,30" x:Name="logout_btn" Command="{Binding LogoutBtn}"></Button>
 
         
     </VerticalStackLayout>
