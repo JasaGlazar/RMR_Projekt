@@ -1,17 +1,38 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace RMR_Projekt
 {
-    public class Izdelek
+    public class Izdelek : INotifyPropertyChanged
     {
-       public string src_slike { get; set; }
+        private bool _isSelected;
+
+        public string src_slike { get; set; }
        public string ime { get; set; }
 
-       public bool IsSelected { get; set; }
+        public event PropertyChangedEventHandler PropertyChanged;
+        private void RaisePropertyChanged(string v)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(v));
+        }
+
+        public bool IsSelected
+        {
+            get { return _isSelected; }
+            set
+            {
+                if (_isSelected != value)
+                {
+                    _isSelected = value;
+                    RaisePropertyChanged("IsSelected");
+                }
+            }
+        }
+
 
         public Izdelek (string slika,string ime)
         {
@@ -19,6 +40,7 @@ namespace RMR_Projekt
             this.ime = ime;
             this.IsSelected = false;
         }
+
 
     }
 
