@@ -229,6 +229,18 @@ namespace RMR_Projekt.Views
                 ApiCall(args.Result[0].Text);
             });
         }
+
+        public void preveri_barvo_alergenov()
+        {
+            if (Preferences.Get("is_dark", false) == true)
+            {
+
+            }
+            else
+            {
+
+            }
+        }
     }
 
     // Define classes to represent the structure of the JSON data
@@ -245,5 +257,7 @@ namespace RMR_Projekt.Views
         public List<string> ingredients_hierarchy { get; set; }
 
     }
+
+
 
 }

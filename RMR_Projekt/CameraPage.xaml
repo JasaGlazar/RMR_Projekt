@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="RMR_Projekt.Views.CameraPage"
              xmlns:cv="clr-namespace:Camera.MAUI;assembly=Camera.MAUI"
+             BackgroundColor="{DynamicResource background}"
              >
     <Grid>
         <Grid.RowDefinitions>
@@ -15,9 +16,9 @@
 
         <ScrollView Grid.Row="1" Margin="0,30,0,0">
             <VerticalStackLayout HorizontalOptions="Center">
-                <Image x:Name="product_image" Aspect="Center"  WidthRequest="150" HeightRequest="150"/>
-                <Label x:Name="product_name"></Label>
-                <Label>Alergeni</Label>
+                <Image x:Name="product_image" Aspect="Center" WidthRequest="150" HeightRequest="150"/>
+                <Label x:Name="product_name" TextColor="{DynamicResource label_color}"></Label>
+                <Label TextColor="{DynamicResource label_color}">Alergeni:</Label>
                 <StackLayout x:Name="alergeni_list"></StackLayout>
             </VerticalStackLayout>
         </ScrollView>

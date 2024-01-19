@@ -8,17 +8,18 @@
 
     <VerticalStackLayout>
     <Grid VerticalOptions="StartAndExpand">
-        <Frame WidthRequest="120" 
-               HeightRequest="120" 
-               CornerRadius="500" 
+        <Border WidthRequest="120" 
+               HeightRequest="120"  
                Margin="50,50,50,20"
                BackgroundColor="#D0FDC5"
-               >
-            <Image x:Name="profile_picture"/>
-        </Frame>
+               StrokeShape="RoundRectangle 500">
+                    <Image x:Name="profile_picture" Aspect="AspectFill" Clip="Ellipse"/>
+            
+        </Border>
+        
 
 
-            <ImageButton x:Name="edit_ProfilePic_btn" Source="edit.png" WidthRequest="36" HeightRequest="36" Margin="200,50,15,20" CornerRadius="15" Aspect="Center" Padding="2"></ImageButton>
+            <ImageButton x:Name="edit_ProfilePic_btn" Source="edit.png" WidthRequest="36" HeightRequest="36" Margin="200,50,15,20" CornerRadius="15" Aspect="Center" Padding="2" Clicked="edit_ProfilePic_btn_Clicked"></ImageButton>
     </Grid>
         <Label x:Name="username_lbl" HorizontalOptions="Center"  FontSize="20" TextColor="{DynamicResource label_color}">USERNAME</Label>
         <HorizontalStackLayout  HorizontalOptions="Center" Margin="10,50,10,0">

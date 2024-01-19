@@ -10,6 +10,8 @@ namespace RMR_Projekt.Views
         public HomePage()
 		{
 			InitializeComponent();
+            izberi_jezik_buttons();
+            pozdrav();
             dodaj();
             //lbl_hello.Text = "Pozdravljen " + user.username;
         }
@@ -18,6 +20,7 @@ namespace RMR_Projekt.Views
         {
             base.OnAppearing();
             izberi_jezik_buttons();
+            pozdrav();
         }
 
         private void brez_alergenov_list_Clicked(object sender, EventArgs e)
@@ -77,6 +80,18 @@ namespace RMR_Projekt.Views
                 alergeni_list.Text = "MOJI ALERGENI";
                 z_alergeni_list.Text = "IZDELKI Z ALERGENI";
                 brez_alergenov_list.Text = "IZDELKI BREZ ALERGENOV";
+            }
+        }
+
+        private void pozdrav()
+        {
+            if (Preferences.Get("is_eng", false) == true)
+            {
+                //lbl_hello.Text = "Hello" + user.username
+            }
+            else
+            {
+                //lbl_hello.Text = "Pozdravljeni" + user.username
             }
         }
     }
