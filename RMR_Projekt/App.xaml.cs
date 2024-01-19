@@ -7,7 +7,7 @@ namespace RMR_Projekt
         public App()
         {
             InitializeComponent();
-            MainPage = new Prijava();
+            MainPage = new AppShell();
         }
     }
 }

@@ -59,8 +59,15 @@ namespace RMR_Projekt.Views
 
                 // Save the modified allergens list back to product.allergens_hierarchy
                 productInfo.product.allergens_hierarchy = modifiedAllergens;
-
-
+                product_image.Source = productInfo.product.image_url;
+                product_name.Text = "Nutella";
+                alergeni_list.Clear();
+                foreach(string product in productInfo.product.allergens_hierarchy.ToList())
+                {
+                    Label l = new Label();
+                    l.Text = product;
+                    alergeni_list.Add(l);
+                }
 
             }
             else
@@ -216,7 +223,6 @@ namespace RMR_Projekt.Views
         {
 			MainThread.BeginInvokeOnMainThread(() =>
 			{
-				//barcodeResult.Text = $"{args.Result[0].Text}";
                 ApiCall(args.Result[0].Text);
             });
         }
