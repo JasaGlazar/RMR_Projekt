@@ -1,5 +1,3 @@
-
-
 namespace RMR_Projekt.Views
 {
 	public partial class ProfilePage : ContentPage
@@ -60,9 +58,29 @@ namespace RMR_Projekt.Views
             }
         }
 
-        //private async void logout_btn_Clicked(object sender, EventArgs e)
-        //{
-            //await Navigation.PushAsync(new Prijava());
-        //}
+        private async void logout_btn_Clicked(object sender, EventArgs e)
+        {
+            await Navigation.PushAsync(new Prijava());
+        }
+
+        private async void edit_ProfilePic_btn_Clicked(object sender, EventArgs e)
+        {
+            var mediaFile = await MediaPicker.PickPhotoAsync();
+            if (mediaFile != null)
+            {
+                // Get the stream of the selected image
+                var stream = await mediaFile.OpenReadAsync();
+
+                // Save the stream to a file in the app's local storage
+                var filePath = Path.Combine(FileSystem.AppDataDirectory, "profile_picture.jpg");
+                using (var fileStream = File.OpenWrite(filePath))
+                {
+                    await stream.CopyToAsync(fileStream);
+                }
+
+                // Set the source of the Image control
+                profile_picture.Source = filePath;
+            }
+        }
     }
 }

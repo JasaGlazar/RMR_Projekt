@@ -67,6 +67,7 @@ namespace RMR_Projekt.Views
                     Label l = new Label();
                     l.Text = product;
                     alergeni_list.Add(l);
+                    l.SetDynamicResource(Label.TextColorProperty, "label_color");
                 }
 
             }
@@ -226,6 +227,7 @@ namespace RMR_Projekt.Views
                 ApiCall(args.Result[0].Text);
             });
         }
+
     }
 
     // Define classes to represent the structure of the JSON data
@@ -242,5 +244,7 @@ namespace RMR_Projekt.Views
         public List<string> ingredients_hierarchy { get; set; }
 
     }
+
+
 
 }
