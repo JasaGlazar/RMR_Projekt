@@ -12,6 +12,14 @@ namespace RMR_Projekt.Views
             BindingContext = new ViewModels.ProfilePageViewModel(Navigation);
             pozdrav();
             NaloziProfilno();
+            if(Preferences.Get("dark",false) == true)
+            {
+                dark_light_switch.IsToggled= true;
+            } 
+            else
+            {
+                dark_light_switch.IsToggled = false;
+            }
 
 		}
 
