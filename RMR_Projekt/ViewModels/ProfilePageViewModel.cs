@@ -18,10 +18,9 @@ namespace RMR_Projekt.ViewModels
 
         }
 
-
         private async void LogoutBtnTappedAsync(object obj)
         {
-            await Shell.Current.GoToAsync("//Prijava");
+            await _navigation.PushAsync(new Prijava());
         }
     }
 }

@@ -1,3 +1,5 @@
+using RMR_Projekt.Data;
+
 namespace RMR_Projekt.Views
 {
 	public partial class ProfilePage : ContentPage
@@ -8,6 +10,8 @@ namespace RMR_Projekt.Views
 		{
 			InitializeComponent();
             BindingContext = new ViewModels.ProfilePageViewModel(Navigation);
+            pozdrav();
+
 		}
 
         private void img_slo_Clicked(object sender, EventArgs e)
@@ -80,6 +84,22 @@ namespace RMR_Projekt.Views
 
                 // Set the source of the Image control
                 profile_picture.Source = filePath;
+            }
+        }
+
+        private void pozdrav()
+        {
+            var currentUser = Preferences.Get("PrijavaToken", " ");
+            string currentEmail = PrijavljenUporabnikFirebase.GetUserEmailFromIdToken(currentUser);
+
+            string[] emailParts = currentEmail.Split('@');
+
+            if (emailParts.Length > 0)
+            {
+                string firstName = emailParts[0];
+                string capitalizedFirstName = char.ToUpper(firstName[0]) + firstName.Substring(1);
+
+                username_lbl.Text = capitalizedFirstName;
             }
         }
     }

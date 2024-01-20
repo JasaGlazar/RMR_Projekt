@@ -31,7 +31,7 @@ namespace RMR_Projekt.Data
         }
 
 
-        private static string GetUserEmailFromIdToken(string currentUser)
+        public static string GetUserEmailFromIdToken(string currentUser)
         {
             try
             {

@@ -1,4 +1,4 @@
-
+using RMR_Projekt.Data;
 
 namespace RMR_Projekt.Views
 {
@@ -84,13 +84,24 @@ namespace RMR_Projekt.Views
 
         private void pozdrav()
         {
-            if (Preferences.Get("is_eng", false) == true)
+            var currentUser = Preferences.Get("PrijavaToken", " ");
+            string currentEmail = PrijavljenUporabnikFirebase.GetUserEmailFromIdToken(currentUser);
+
+            string[] emailParts = currentEmail.Split('@');
+
+            if (emailParts.Length > 0)
             {
-                //lbl_hello.Text = "Hello" + user.username
-            }
-            else
-            {
-                //lbl_hello.Text = "Pozdravljeni" + user.username
+                string firstName = emailParts[0];
+                string capitalizedFirstName = char.ToUpper(firstName[0]) + firstName.Substring(1);
+
+                if (Preferences.Get("is_eng", false))
+                {
+                    lbl_hello.Text = "Hello " + capitalizedFirstName;
+                }
+                else
+                {
+                    lbl_hello.Text = "Pozdravljeni " + capitalizedFirstName;
+                }
             }
         }
     }

@@ -4,7 +4,8 @@
              x:Class="RMR_Projekt.SeznamIzdelkov"
              Shell.NavBarIsVisible="True"
              Shell.BackgroundColor="Green"
-             BackgroundColor="{DynamicResource background}">
+             BackgroundColor="{DynamicResource background}"
+             Title=" ">
     <ScrollView>
         <VerticalStackLayout>
             <CollectionView x:Name="list_izdelkov">
