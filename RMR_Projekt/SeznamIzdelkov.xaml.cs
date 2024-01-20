@@ -1,6 +1,8 @@
 using Firebase.Auth;
+using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using RMR_Projekt.Data;
 using System.Formats.Asn1;
 using System.Text;
 using ZXing.Aztec.Internal;
@@ -69,8 +71,8 @@ public partial class SeznamIzdelkov : ContentPage
                 var fetchResponse = await httpClient.GetAsync(fetchUrl);
                 var usersData = fetchResponse.IsSuccessStatusCode ? JsonConvert.DeserializeObject<Dictionary<string, JObject>>(await fetchResponse.Content.ReadAsStringAsync()) : null;
 
-                string idk = "lol";
-                await Console.Out.WriteLineAsync("lol");
+                //string idk = "lol";
+                //await Console.Out.WriteLineAsync("lol");
 
                 // If usersData is null or empty, create a new user
                 if (usersData == null || !usersData.Any())
@@ -170,7 +172,7 @@ public partial class SeznamIzdelkov : ContentPage
     }
 
 
-    private async Task<JObject> FetchUserData(string userEmail)
+    /*private async Task<JObject> FetchUserData(string userEmail)
     {
         var firebaseUrl = "https://rmr-projekt-a8434-default-rtdb.europe-west1.firebasedatabase.app/";
         var endpoint = "PrijavljenUporabnik.json";
@@ -186,26 +188,15 @@ public partial class SeznamIzdelkov : ContentPage
 
             return userKey != null ? usersData[userKey] : null;
         }
-    }
+    }*/
 
     private async void LoadUserPreferences()
     {
-        var currentUser = Preferences.Get("PrijavaToken", " ");
-        if (!string.IsNullOrEmpty(currentUser))
+        var userAllergens = await PrijavljenUporabnikFirebase.VrniAlergene();
+
+        foreach (var allergen in moji_alergeni)
         {
-            string userEmail = GetUserEmailFromIdToken(currentUser);
-            if (!string.IsNullOrEmpty(userEmail))
-            {
-                var userData = await FetchUserData(userEmail);
-                if (userData != null)
-                {
-                    var userAllergens = userData["alergeni"].ToObject<List<string>>();
-                    foreach (var allergen in moji_alergeni)
-                    {
-                        allergen.IsSelected = userAllergens.Contains(allergen.ime.ToLower());
-                    }
-                }
-            }
+            allergen.IsSelected = userAllergens.Contains(allergen.ime.ToLower());
         }
 
         list_izdelkov.ItemsSource = moji_alergeni;
