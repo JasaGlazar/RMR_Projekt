@@ -1,5 +1,7 @@
+using Microcharts;
 using Microsoft.Maui.ApplicationModel;
 using Newtonsoft.Json;
+using SkiaSharp;
 using System.Text;
 
 namespace RMR_Projekt.Views
@@ -15,7 +17,6 @@ namespace RMR_Projekt.Views
         protected override void OnAppearing()
         {
             base.OnAppearing();
-
             StartCamera();
         }
 
@@ -29,6 +30,11 @@ namespace RMR_Projekt.Views
                     await cameraView.StartCameraAsync();
                 });
             }
+
+            chartView.Chart = new DonutChart()
+            {
+                Entries = new ChartEntry[] {},
+            };
         }
 
         private void cameraView_CamerasLoaded(object sender, EventArgs e)
@@ -37,17 +43,13 @@ namespace RMR_Projekt.Views
         }
 
 
-
-
         private async void ApiCall(string BarcodeNumber)
         {
             string apiPath = "https://world.openfoodfacts.org/api/v2/product/";
             //var number = barcodeResult.Text.Trim();
             var numberTest = BarcodeNumber;
 
-
             string json = await GetJsonAsync($"{apiPath}{numberTest}.json");
-
 
             if (!string.IsNullOrEmpty(json))
             {
@@ -73,16 +75,55 @@ namespace RMR_Projekt.Views
 
                 // Save the modified allergens list back to product.allergens_hierarchy
                 productInfo.product.allergens_hierarchy = modifiedAllergens;
+
                 product_image.Source = productInfo.product.image_url;
-                product_name.Text = "Nutella";
+                product_name.Text = productInfo.product.product_name;
                 alergeni_list.Clear();
-                foreach(string product in productInfo.product.allergens_hierarchy.ToList())
+                foreach (string product in productInfo.product.allergens_hierarchy.ToList())
                 {
                     Label l = new Label();
                     l.Text = product;
                     alergeni_list.Add(l);
                     l.SetDynamicResource(Label.TextColorProperty, "label_color");
                 }
+
+                List<ChartEntry> chartEntries = new List<ChartEntry>();
+
+                // Nutriments to include in the chart
+                string[] targetNutriments = { "proteins", "carbohydrates", "fat" };
+
+                foreach (var nutrient in productInfo.product.nutriments)
+                {
+                    // Check if the nutrient is one of the target nutriments
+                    if (targetNutriments.Contains(nutrient.Key))
+                    {
+                        if (float.TryParse(nutrient.Value, out float nutrientValue))
+                        {
+                            // Use nutrient.Key for the Label and nutrient.Value for the ValueLabel
+                            ChartEntry entry = new ChartEntry(nutrientValue)
+                            {
+                                Label = nutrient.Key,
+                                ValueLabel = nutrient.Value.ToString(), // Assuming the value is numeric; adjust if necessary
+                                Color = GetRandomColor() // Assign a random color
+                            };
+
+                            chartEntries.Add(entry);
+                        }
+                        else
+                        {
+                            await Console.Out.WriteLineAsync($"Failed to convert nutrient value for {nutrient.Key} to float.");
+                        }
+                    }
+                }
+
+                ChartEntry[] chartEntry = chartEntries.ToArray();
+
+                chartView.Chart = new DonutChart
+                {
+                    Entries = chartEntry,
+                };
+
+                FirebasePOST(productInfo);
 
             }
             else
@@ -128,7 +169,7 @@ namespace RMR_Projekt.Views
             }
         }
 
-      /*  private async void Button_Clicked(object sender, EventArgs e)
+        private async void Button_Clicked(object sender, EventArgs e)
         {
             string apiPath = "https://world.openfoodfacts.org/api/v2/product/";
             //var number = barcodeResult.Text.Trim();
@@ -163,6 +204,54 @@ namespace RMR_Projekt.Views
                 // Save the modified allergens list back to product.allergens_hierarchy
                 productInfo.product.allergens_hierarchy = modifiedAllergens;
 
+                product_image.Source = productInfo.product.image_url;
+                product_name.Text = productInfo.product.product_name;
+                alergeni_list.Clear();
+                foreach (string product in productInfo.product.allergens_hierarchy.ToList())
+                {
+                    Label l = new Label();
+                    l.Text = product;
+                    alergeni_list.Add(l);
+                    l.SetDynamicResource(Label.TextColorProperty, "label_color");
+                }
+
+
+                List<ChartEntry> chartEntries = new List<ChartEntry>();
+
+                // Nutriments to include in the chart
+                string[] targetNutriments = { "proteins", "carbohydrates", "fat" };
+
+                foreach (var nutrient in productInfo.product.nutriments)
+                {
+                    // Check if the nutrient is one of the target nutriments
+                    if (targetNutriments.Contains(nutrient.Key))
+                    {
+                        if (float.TryParse(nutrient.Value, out float nutrientValue))
+                        {
+                            // Use nutrient.Key for the Label and nutrient.Value for the ValueLabel
+                            ChartEntry entry = new ChartEntry(nutrientValue)
+                            {
+                                Label = nutrient.Key,
+                                ValueLabel = nutrient.Value.ToString(), // Assuming the value is numeric; adjust if necessary
+                                Color = GetRandomColor() // Assign a random color
+                            };
+
+                            chartEntries.Add(entry);
+                        }
+                        else
+                        {
+                            await Console.Out.WriteLineAsync($"Failed to convert nutrient value for {nutrient.Key} to float.");
+                        }
+                    }
+                }
+
+                ChartEntry[] chartEntry = chartEntries.ToArray();
+
+                chartView.Chart = new DonutChart
+                {
+                    Entries = chartEntry,
+                };
+
 
                 using (HttpClient client = new HttpClient())
                 {
@@ -193,7 +282,6 @@ namespace RMR_Projekt.Views
                         // Handle the error
                         Console.WriteLine($"Error: {response.StatusCode} - {response.ReasonPhrase}");
                     }
-
                 }
             }
             else
@@ -203,8 +291,18 @@ namespace RMR_Projekt.Views
             }
 
         }
-      */
 
+
+        // Function to get a truly random color
+        private SKColor GetRandomColor()
+        {
+            Random random = new Random();
+
+            byte[] colorBytes = new byte[3];
+            random.NextBytes(colorBytes);
+
+            return new SKColor(colorBytes[0], colorBytes[1], colorBytes[2]);
+        }
         private async Task<string> GetJsonAsync(string url)
         {
             using (HttpClient client = new HttpClient())
@@ -232,8 +330,6 @@ namespace RMR_Projekt.Views
                 }
             }
         }
-
-
         private void cameraView_BarcodeDetected(object sender, Camera.MAUI.ZXingHelper.BarcodeEventArgs args)
         {
 			MainThread.BeginInvokeOnMainThread(() =>
@@ -255,6 +351,7 @@ namespace RMR_Projekt.Views
     {
         public string product_name { get; set; }
         public List<string> allergens_hierarchy { get; set; }
+        public Dictionary<string, string> nutriments {  get; set; }
         public string image_url { get; set; }
         public List<string> ingredients_hierarchy { get; set; }
 
