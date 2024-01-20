@@ -21,17 +21,18 @@ namespace RMR_Projekt.Views
                 dark_light_switch.IsToggled = false;
             }
 
-            if (Preferences.Get("is_eng",false) == true)
+            if (Preferences.Get("is_eng", false) == true)
             {
                 img_eng.BackgroundColor = Color.FromArgb("#a8ff93");
                 img_slo.BackgroundColor = Color.FromRgba(0, 0, 0, 0);
-            } 
+            }
             else
             {
-                {
-                    img_slo.BackgroundColor = Color.FromArgb("#a8ff93");
-                    img_eng.BackgroundColor = Color.FromRgba(0, 0, 0, 0);
-                }
+                
+                img_slo.BackgroundColor = Color.FromArgb("#a8ff93");
+                img_eng.BackgroundColor = Color.FromRgba(0, 0, 0, 0);
+
+            }
 
 		}
 
