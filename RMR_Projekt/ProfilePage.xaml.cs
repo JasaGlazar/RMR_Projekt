@@ -34,9 +34,7 @@ namespace RMR_Projekt.Views
 
             }
 
-            }
         }
-
         protected override void OnAppearing()
         {
             base.OnAppearing();

@@ -127,6 +127,12 @@ namespace RMR_Projekt.Views
                     Entries = chartEntry,
                 };
 
+                bool SeAlergeniUjemajo = await PreveriAlergene(productInfo);
+
+                if(SeAlergeniUjemajo)
+                {
+
+                }
 
 
 
@@ -178,7 +184,6 @@ namespace RMR_Projekt.Views
 
         private async Task<bool> PreveriAlergene(ProductInfo productInfo)
         {
-
             var userAllergens = await PrijavljenUporabnikFirebase.VrniAlergene();
             var productAllergens = productInfo.product.allergens_hierarchy;
 
@@ -186,7 +191,6 @@ namespace RMR_Projekt.Views
             bool hasCommonAllergens = userAllergens.Intersect(productAllergens).Any();
 
             return hasCommonAllergens;
-
         }
 
         private async void Button_Clicked(object sender, EventArgs e)

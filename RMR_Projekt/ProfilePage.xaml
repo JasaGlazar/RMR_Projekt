@@ -47,7 +47,7 @@
 
 
 
-        <ImageButton Source="logout.ong" BackgroundColor="Red" Margin="30,50,30,30" x:Name="logout_btn" Command="{Binding LogoutBtn}"></ImageButton>
+        <ImageButton Source="logout.png" BackgroundColor="Red" Margin="30,50,30,30" x:Name="logout_btn" Command="{Binding LogoutBtn}"></ImageButton>
 
         
     </VerticalStackLayout>

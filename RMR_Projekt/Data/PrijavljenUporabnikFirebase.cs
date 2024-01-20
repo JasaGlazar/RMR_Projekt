@@ -5,12 +5,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using RMR_Projekt.Views;
 
 namespace RMR_Projekt.Data
 {
     static class PrijavljenUporabnikFirebase
     {
         private static string firebaseApiKey = "AIzaSyDjdAnxx_FBJ9nZzENatjoRKtH7K02sGNE";
+
+        private static string loggedUserData = Preferences.Get("PrijavaToken", " ");
 
         private static async Task<JObject> FetchUserData(string userEmail)
         {
@@ -73,8 +76,6 @@ namespace RMR_Projekt.Data
                 }
             }
 
-
-
             return new List<string>();
         }
 
@@ -99,5 +100,45 @@ namespace RMR_Projekt.Data
 
             return new List<string>();
         }
+
+
+        public static async Task DodajProduktZAlergeni(ProductInfo productInfo)
+        {
+                string userEmail = GetUserEmailFromIdToken(loggedUserData);
+                if (!string.IsNullOrEmpty(userEmail))
+                {
+                    var userData = await FetchUserData(userEmail);
+                    if (userData != null)
+                    {
+                        // Get the current list of products
+                        var currentProducts = userData["ProduktiZ"].ToObject<List<string>>();
+
+                        // Add the new product code if it's not already in the list
+                        if (!currentProducts.Contains(productInfo.Code))
+                        {
+                            currentProducts.Add(productInfo.Code);
+                        }
+
+                        // Update the ProduktiZ property in the database
+                        userData["ProduktiZ"] = JToken.FromObject(currentProducts);
+                        await UpdateUserData(userEmail, userData);
+                    }
+                }
+        }
+
+        private static async Task UpdateUserData(string userEmail, JObject userData)
+        {
+            var firebaseUrl = "https://rmr-projekt-a8434-default-rtdb.europe-west1.firebasedatabase.app/";
+            var endpoint = $"PrijavljenUporabnik/{Uri.EscapeDataString(userEmail)}.json";
+
+            using (var httpClient = new HttpClient())
+            {
+                var updateUrl = $"{firebaseUrl}{endpoint}?auth={firebaseApiKey}";
+                var jsonContent = JsonConvert.SerializeObject(userData);
+                var httpContent = new StringContent(jsonContent, Encoding.UTF8, "application/json");
+                await httpClient.PutAsync(updateUrl, httpContent);
+            }
+        }
+
     }
 }
