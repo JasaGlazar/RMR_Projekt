@@ -1,6 +1,7 @@
 using Microcharts;
 using Microsoft.Maui.ApplicationModel;
 using Newtonsoft.Json;
+using RMR_Projekt.Data;
 using SkiaSharp;
 using System.Text;
 
@@ -123,6 +124,8 @@ namespace RMR_Projekt.Views
                     Entries = chartEntry,
                 };
 
+
+
                 FirebasePOST(productInfo);
 
             }
@@ -167,6 +170,19 @@ namespace RMR_Projekt.Views
                 }
 
             }
+        }
+
+        private async Task<bool> PreveriAlergene(ProductInfo productInfo)
+        {
+
+            var userAllergens = await PrijavljenUporabnikFirebase.VrniAlergene();
+            var productAllergens = productInfo.product.allergens_hierarchy;
+
+            // Check if there are any common allergens
+            bool hasCommonAllergens = userAllergens.Intersect(productAllergens).Any();
+
+            return hasCommonAllergens;
+
         }
 
         private async void Button_Clicked(object sender, EventArgs e)
