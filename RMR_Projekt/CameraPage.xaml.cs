@@ -138,9 +138,7 @@ namespace RMR_Projekt.Views
                     await Console.Out.WriteLineAsync("lol");
                 }
 
-
-
-                FirebasePOST(productInfo);
+                ProductInfoFirebase.POSTProductInfo(productInfo);
 
             }
             else
@@ -151,7 +149,7 @@ namespace RMR_Projekt.Views
 
         }
 
-        private async void FirebasePOST(ProductInfo productInfo)
+       /* private async void FirebasePOST(ProductInfo productInfo)
         {
             using (HttpClient client = new HttpClient())
             {
@@ -184,7 +182,7 @@ namespace RMR_Projekt.Views
                 }
 
             }
-        }
+        } */
 
         private async Task<bool> PreveriAlergene(ProductInfo productInfo)
         {
