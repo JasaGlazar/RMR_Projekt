@@ -3,11 +3,13 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="RMR_Projekt.Views.CameraPage"
              xmlns:cv="clr-namespace:Camera.MAUI;assembly=Camera.MAUI"
+             xmlns:Mc="clr-namespace:Microcharts.Maui;assembly=Microcharts.Maui"
              BackgroundColor="{DynamicResource background}"
              >
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="250"/>
+            <RowDefinition Height="*"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
@@ -23,8 +25,8 @@
             </VerticalStackLayout>
         </ScrollView>
 
+        <Mc:ChartView x:Name="chartView" Grid.Row="2" />
 
-                
 
 
 

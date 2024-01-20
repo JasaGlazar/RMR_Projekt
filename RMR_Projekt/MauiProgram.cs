@@ -1,5 +1,6 @@
 ﻿using Camera.MAUI;
 using Microsoft.Extensions.Logging;
+using Microcharts.Maui;
 
 namespace RMR_Projekt
 {
@@ -10,6 +11,7 @@ namespace RMR_Projekt
             var builder = MauiApp.CreateBuilder();
             builder
                 .UseMauiApp<App>()
+                .UseMicrocharts()
                 .UseMauiCameraView()
                 .ConfigureFonts(fonts =>
                 {
