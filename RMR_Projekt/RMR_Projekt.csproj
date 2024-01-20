@@ -85,6 +85,12 @@
 	  <Compile Update="HomePage.xaml.cs">
 	    <DependentUpon>HomePage.xaml</DependentUpon>
 	  </Compile>
+	  <Compile Update="SeznamIzdelkov.xaml.cs">
+	    <DependentUpon>SeznamIzdelkov.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="SeznamAlergenov.xaml.cs">
+	    <DependentUpon>SeznamAlergenov.xaml</DependentUpon>
+	  </Compile>
 	</ItemGroup>
 
 	<ItemGroup>
@@ -110,6 +116,9 @@
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="SeznamIzdelkov.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="SeznamAlergenov.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	</ItemGroup>

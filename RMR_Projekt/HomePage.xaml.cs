@@ -13,7 +13,6 @@ namespace RMR_Projekt.Views
             izberi_jezik_buttons();
             pozdrav();
             dodaj();
-            //lbl_hello.Text = "Pozdravljen " + user.username;
         }
 
         protected override void OnAppearing()
@@ -33,9 +32,16 @@ namespace RMR_Projekt.Views
             izberi_jezik("Izdelki z alergeni","Products with alergens", alergeni_z);
         }
 
-        private void alergeni_list_Clicked(object sender, EventArgs e)
+        private async void alergeni_list_Clicked(object sender, EventArgs e)
         {
-            izberi_jezik("Moji alergeni","My alergens", moji_alergeni);
+            if (Preferences.Get("is_eng", false) == true)
+            {
+                await Navigation.PushAsync(new SeznamAlergenov("My alergens", moji_alergeni));
+            }
+            else
+            {
+                await Navigation.PushAsync(new SeznamAlergenov("Moji alergeni", moji_alergeni));
+            }
         }
 
         private void dodaj()
