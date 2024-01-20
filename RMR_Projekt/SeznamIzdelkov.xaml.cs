@@ -35,7 +35,7 @@ public partial class SeznamIzdelkov : ContentPage
 
         var currentUser = Preferences.Get("PrijavaToken", " ");
 
-        if(!string.IsNullOrEmpty(currentUser) )
+        if(!string.IsNullOrEmpty(currentUser))
         {
             string userEmail = GetUserEmailFromIdToken(currentUser);
 

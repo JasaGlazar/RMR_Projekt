@@ -101,6 +101,28 @@ namespace RMR_Projekt.Data
             return new List<string>();
         }
 
+        public static async Task<List<string>> VrniProdukteZAlergeni()
+        {
+            var currentUser = Preferences.Get("PrijavaToken", " ");
+
+            if (!string.IsNullOrEmpty(currentUser))
+            {
+                string UserEmail = GetUserEmailFromIdToken(currentUser);
+                if (!string.IsNullOrEmpty(UserEmail))
+                {
+                    var userData = await FetchUserData(UserEmail);
+                    if (userData != null)
+                    {
+                        var userProduktiBrezAlergenov = userData["ProduktiZ"].ToObject<List<string>>();
+
+                        return userProduktiBrezAlergenov;
+                    }
+                }
+            }
+
+            return new List<string>();
+        }
+
 
         public static async Task DodajProduktZAlergeni(ProductInfo productInfo)
         {
@@ -129,14 +151,24 @@ namespace RMR_Projekt.Data
         private static async Task UpdateUserData(string userEmail, JObject userData)
         {
             var firebaseUrl = "https://rmr-projekt-a8434-default-rtdb.europe-west1.firebasedatabase.app/";
-            var endpoint = $"PrijavljenUporabnik/{Uri.EscapeDataString(userEmail)}.json";
+            var endpoint = "PrijavljenUporabnik.json";
 
             using (var httpClient = new HttpClient())
             {
-                var updateUrl = $"{firebaseUrl}{endpoint}?auth={firebaseApiKey}";
-                var jsonContent = JsonConvert.SerializeObject(userData);
-                var httpContent = new StringContent(jsonContent, Encoding.UTF8, "application/json");
-                await httpClient.PutAsync(updateUrl, httpContent);
+                var fetchUrl = $"{firebaseUrl}{endpoint}?auth={firebaseApiKey}";
+                var fetchResponse = await httpClient.GetAsync(fetchUrl);
+                var usersData = fetchResponse.IsSuccessStatusCode ? JsonConvert.DeserializeObject<Dictionary<string, JObject>>(await fetchResponse.Content.ReadAsStringAsync()) : null;
+
+                // Find the user with the matching email
+                var userKey = usersData?.FirstOrDefault(kvp => kvp.Value["username"]?.Value<string>() == userEmail).Key;
+
+                if (userKey != null)
+                {
+                    var updateUrl = $"{firebaseUrl}PrijavljenUporabnik/{userKey}.json?auth={firebaseApiKey}";
+                    var jsonContent = JsonConvert.SerializeObject(userData);
+                    var httpContent = new StringContent(jsonContent, Encoding.UTF8, "application/json");
+                    await httpClient.PutAsync(updateUrl, httpContent);
+                }
             }
         }
 

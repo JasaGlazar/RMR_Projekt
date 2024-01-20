@@ -131,7 +131,11 @@ namespace RMR_Projekt.Views
 
                 if(SeAlergeniUjemajo)
                 {
-
+                   await PrijavljenUporabnikFirebase.DodajProduktZAlergeni(productInfo);
+                }
+                else
+                {
+                    await Console.Out.WriteLineAsync("lol");
                 }
 
 
@@ -195,127 +199,129 @@ namespace RMR_Projekt.Views
 
         private async void Button_Clicked(object sender, EventArgs e)
         {
-            string apiPath = "https://world.openfoodfacts.org/api/v2/product/";
-            //var number = barcodeResult.Text.Trim();
-            var numberTest = "8000500357729";
+            /* string apiPath = "https://world.openfoodfacts.org/api/v2/product/";
+             //var number = barcodeResult.Text.Trim();
+             var numberTest = "8000500357729";
 
 
-            string json = await GetJsonAsync($"{apiPath}{numberTest}.json");
+             string json = await GetJsonAsync($"{apiPath}{numberTest}.json");
 
 
-            if (!string.IsNullOrEmpty(json))
-            {
-                // Deserialize the JSON into a ProductInfo object
-                ProductInfo productInfo = JsonConvert.DeserializeObject<ProductInfo>(json);
+             if (!string.IsNullOrEmpty(json))
+             {
+                 // Deserialize the JSON into a ProductInfo object
+                 ProductInfo productInfo = JsonConvert.DeserializeObject<ProductInfo>(json);
 
-                var allergens = productInfo.product.allergens_hierarchy;
+                 var allergens = productInfo.product.allergens_hierarchy;
 
-                List<string> modifiedAllergens = new List<string>();
+                 List<string> modifiedAllergens = new List<string>();
 
-                foreach (var allergen in allergens)
-                {
-                    // Find the position of ":" and remove everything before it
-                    int colonIndex = allergen.IndexOf(':');
-                    string modifiedAllergen = colonIndex != -1 ? allergen.Substring(colonIndex + 1) : allergen;
+                 foreach (var allergen in allergens)
+                 {
+                     // Find the position of ":" and remove everything before it
+                     int colonIndex = allergen.IndexOf(':');
+                     string modifiedAllergen = colonIndex != -1 ? allergen.Substring(colonIndex + 1) : allergen;
 
-                    // Add the modified allergen to the new list
-                    modifiedAllergens.Add(modifiedAllergen);
-                }
+                     // Add the modified allergen to the new list
+                     modifiedAllergens.Add(modifiedAllergen);
+                 }
 
-                // Isto se naredi za sestavine produkta
-                // Posodib json pa classe da bodo shranejvali hranilne vrednosti za graf -> Borba za èetrtek
+                 // Isto se naredi za sestavine produkta
+                 // Posodib json pa classe da bodo shranejvali hranilne vrednosti za graf -> Borba za èetrtek
 
-                // Save the modified allergens list back to product.allergens_hierarchy
-                productInfo.product.allergens_hierarchy = modifiedAllergens;
+                 // Save the modified allergens list back to product.allergens_hierarchy
+                 productInfo.product.allergens_hierarchy = modifiedAllergens;
 
-                product_image.Source = productInfo.product.image_url;
-                product_name.Text = productInfo.product.product_name;
-                alergeni_list.Clear();
-                Label l2 = new Label();
-                l2.Text = "Alergeni:";
-                alergeni_list.Add(l2);
-                foreach (string product in productInfo.product.allergens_hierarchy.ToList())
-                {
-                    Label l = new Label();
-                    l.Text = product;
-                    alergeni_list.Add(l);
-                    l.SetDynamicResource(Label.TextColorProperty, "label_color");
-                }
-
-
-                List<ChartEntry> chartEntries = new List<ChartEntry>();
-
-                // Nutriments to include in the chart
-                string[] targetNutriments = { "proteins", "carbohydrates", "fat" };
-
-                foreach (var nutrient in productInfo.product.nutriments)
-                {
-                    // Check if the nutrient is one of the target nutriments
-                    if (targetNutriments.Contains(nutrient.Key))
-                    {
-                        if (float.TryParse(nutrient.Value, out float nutrientValue))
-                        {
-                            // Use nutrient.Key for the Label and nutrient.Value for the ValueLabel
-                            ChartEntry entry = new ChartEntry(nutrientValue)
-                            {
-                                Label = nutrient.Key,
-                                ValueLabel = nutrient.Value.ToString(), // Assuming the value is numeric; adjust if necessary
-                                Color = GetRandomColor() // Assign a random color
-                            };
-
-                            chartEntries.Add(entry);
-                        }
-                        else
-                        {
-                            await Console.Out.WriteLineAsync($"Failed to convert nutrient value for {nutrient.Key} to float.");
-                        }
-                    }
-                }
-
-                ChartEntry[] chartEntry = chartEntries.ToArray();
-
-                chartView.Chart = new DonutChart
-                {
-                    Entries = chartEntry,
-                };
+                 product_image.Source = productInfo.product.image_url;
+                 product_name.Text = productInfo.product.product_name;
+                 alergeni_list.Clear();
+                 Label l2 = new Label();
+                 l2.Text = "Alergeni:";
+                 alergeni_list.Add(l2);
+                 foreach (string product in productInfo.product.allergens_hierarchy.ToList())
+                 {
+                     Label l = new Label();
+                     l.Text = product;
+                     alergeni_list.Add(l);
+                     l.SetDynamicResource(Label.TextColorProperty, "label_color");
+                 }
 
 
-                using (HttpClient client = new HttpClient())
-                {
-                    // Convert ProductInfo to JSON
-                    string contentJson = JsonConvert.SerializeObject(productInfo);
+                 List<ChartEntry> chartEntries = new List<ChartEntry>();
 
-                    // Specify the Firebase Realtime Database URL and the node to post to
-                    string firebaseUrl = "https://rmr-projekt-a8434-default-rtdb.europe-west1.firebasedatabase.app/";
-                    string firebaseNode = "ProductInfo/";
+                 // Nutriments to include in the chart
+                 string[] targetNutriments = { "proteins", "carbohydrates", "fat" };
 
-                    // Build the URL for the POST request
-                    string requestUrl = $"{firebaseUrl}{firebaseNode}.json";
+                 foreach (var nutrient in productInfo.product.nutriments)
+                 {
+                     // Check if the nutrient is one of the target nutriments
+                     if (targetNutriments.Contains(nutrient.Key))
+                     {
+                         if (float.TryParse(nutrient.Value, out float nutrientValue))
+                         {
+                             // Use nutrient.Key for the Label and nutrient.Value for the ValueLabel
+                             ChartEntry entry = new ChartEntry(nutrientValue)
+                             {
+                                 Label = nutrient.Key,
+                                 ValueLabel = nutrient.Value.ToString(), // Assuming the value is numeric; adjust if necessary
+                                 Color = GetRandomColor() // Assign a random color
+                             };
 
-                    // Create a StringContent with the JSON data
-                    StringContent content = new StringContent(contentJson, Encoding.UTF8, "application/json");
+                             chartEntries.Add(entry);
+                         }
+                         else
+                         {
+                             await Console.Out.WriteLineAsync($"Failed to convert nutrient value for {nutrient.Key} to float.");
+                         }
+                     }
+                 }
 
-                    // Send the POST request
-                    var response = await client.PostAsync(requestUrl, content);
+                 ChartEntry[] chartEntry = chartEntries.ToArray();
 
-                    // Check if the request was successful (status code 200-299)
-                    if (response.IsSuccessStatusCode)
-                    {
-                        // Successfully posted the data
-                        Console.WriteLine("Data posted successfully!");
-                    }
-                    else
-                    {
-                        // Handle the error
-                        Console.WriteLine($"Error: {response.StatusCode} - {response.ReasonPhrase}");
-                    }
-                }
-            }
-            else
-            {
-                // Handle the case where JSON is not available or invalid
-                Console.WriteLine("Failed to fetch valid JSON data.");
-            }
+                 chartView.Chart = new DonutChart
+                 {
+                     Entries = chartEntry,
+                 };
+
+
+                 using (HttpClient client = new HttpClient())
+                 {
+                     // Convert ProductInfo to JSON
+                     string contentJson = JsonConvert.SerializeObject(productInfo);
+
+                     // Specify the Firebase Realtime Database URL and the node to post to
+                     string firebaseUrl = "https://rmr-projekt-a8434-default-rtdb.europe-west1.firebasedatabase.app/";
+                     string firebaseNode = "ProductInfo/";
+
+                     // Build the URL for the POST request
+                     string requestUrl = $"{firebaseUrl}{firebaseNode}.json";
+
+                     // Create a StringContent with the JSON data
+                     StringContent content = new StringContent(contentJson, Encoding.UTF8, "application/json");
+
+                     // Send the POST request
+                     var response = await client.PostAsync(requestUrl, content);
+
+                     // Check if the request was successful (status code 200-299)
+                     if (response.IsSuccessStatusCode)
+                     {
+                         // Successfully posted the data
+                         Console.WriteLine("Data posted successfully!");
+                     }
+                     else
+                     {
+                         // Handle the error
+                         Console.WriteLine($"Error: {response.StatusCode} - {response.ReasonPhrase}");
+                     }
+                 }
+             }
+             else
+             {
+                 // Handle the case where JSON is not available or invalid
+                 Console.WriteLine("Failed to fetch valid JSON data.");
+             }*/
+
+           ApiCall("8000500357729");
 
         }
 
@@ -365,6 +371,10 @@ namespace RMR_Projekt.Views
             });
         }
 
+        private void Button_Clicked_1(object sender, EventArgs e)
+        {
+
+        }
     }
 
     // Define classes to represent the structure of the JSON data
