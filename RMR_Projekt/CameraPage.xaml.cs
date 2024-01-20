@@ -126,6 +126,7 @@ namespace RMR_Projekt.Views
 
 
 
+
                 FirebasePOST(productInfo);
 
             }

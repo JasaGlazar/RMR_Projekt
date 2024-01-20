@@ -6,26 +6,26 @@ namespace RMR_Projekt.Views
 	{
         public bool is_eng_on = false;
         public bool is_dark_on = false;
-		public ProfilePage()
-		{
-			InitializeComponent();
+        public ProfilePage()
+        {
+            InitializeComponent();
             BindingContext = new ViewModels.ProfilePageViewModel(Navigation);
             pozdrav();
             NaloziProfilno();
-            if(Preferences.Get("dark",false) == true)
+            if (Preferences.Get("dark", false) == true)
             {
-                dark_light_switch.IsToggled= true;
-            } 
+                dark_light_switch.IsToggled = true;
+            }
             else
             {
                 dark_light_switch.IsToggled = false;
             }
 
-            if (Preferences.Get("is_eng",false) == true)
+            if (Preferences.Get("is_eng", false) == true)
             {
                 img_eng.BackgroundColor = Color.FromArgb("#a8ff93");
                 img_slo.BackgroundColor = Color.FromRgba(0, 0, 0, 0);
-            } 
+            }
             else
             {
                 {
@@ -33,7 +33,8 @@ namespace RMR_Projekt.Views
                     img_eng.BackgroundColor = Color.FromRgba(0, 0, 0, 0);
                 }
 
-		}
+            }
+        }
 
         protected override void OnAppearing()
         {
