@@ -16,8 +16,8 @@
                                 <ColumnDefinition Width="auto"/>
                                 <ColumnDefinition Width="*"/>
                             </Grid.ColumnDefinitions>
-                            <Image Source="{Binding src_slike}" WidthRequest="50" HeightRequest="50" VerticalOptions="Center" Margin="10" Grid.Column="0"></Image>
-                            <Label Text="{Binding ime}" FontSize="15" TextColor="{DynamicResource label_color}" Grid.Column="1" VerticalOptions="Center" Margin="10,0,0,0" HorizontalOptions="StartAndExpand"></Label>
+                            <Image Source="{Binding product.image_url}" WidthRequest="50" HeightRequest="50" VerticalOptions="Center" Margin="10" Grid.Column="0"></Image>
+                            <Label Text="{Binding product.product_name}" FontSize="15" TextColor="{DynamicResource label_color}" Grid.Column="1" VerticalOptions="Center" Margin="10,0,0,0" HorizontalOptions="StartAndExpand"></Label>
                         </Grid>
                     </DataTemplate>
                 </CollectionView.ItemTemplate>

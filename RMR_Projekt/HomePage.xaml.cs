@@ -22,15 +22,55 @@ namespace RMR_Projekt.Views
             pozdrav();
         }
 
-        private void brez_alergenov_list_Clicked(object sender, EventArgs e)
+        private async void brez_alergenov_list_Clicked(object sender, EventArgs e)
         {
-            izberi_jezik("Izdelki brez alergenov","Products without alergens",alergeni_brez);
+
+            List<ProductInfo> Items = await ProductInfoFirebase.VrniProductInfo();
+
+            List<string> barcodesBrezAlergenov = await PrijavljenUporabnikFirebase.VrniProdukteZAlergeni();
+
+            List<ProductInfo> IzpisiIzdelke = new List<ProductInfo>();
+
+            foreach (var Izdelek in Items)
+            {
+                foreach (var Koda in barcodesBrezAlergenov)
+                {
+                    if (Izdelek.Code != Koda && Izdelek.Code != "placeholder")
+                    {
+                        IzpisiIzdelke.Add(Izdelek);
+                    }
+                }
+            }
+
+            izberi_jezik("Izdelki brez alergenov","Products without alergens", IzpisiIzdelke);
+
         }
 
-        private void z_alergeni_list_Clicked(object sender, EventArgs e)
+        private async void z_alergeni_list_Clicked(object sender, EventArgs e)
         {
-            izberi_jezik("Izdelki z alergeni","Products with alergens", alergeni_z);
+
+            List<ProductInfo> Items = await ProductInfoFirebase.VrniProductInfo();
+
+            List<string> barcodesBrezAlergenov = await PrijavljenUporabnikFirebase.VrniProdukteZAlergeni();
+
+            List<ProductInfo> IzpisiIzdelke = new List<ProductInfo>();
+
+            foreach (var Izdelek in Items)
+            {
+                foreach (var Koda in barcodesBrezAlergenov)
+                {
+                    if (Izdelek.Code == Koda && Izdelek.Code != "placeholder")
+                    {
+                        IzpisiIzdelke.Add(Izdelek);
+                    }
+                }
+            }
+
+            izberi_jezik("Izdelki z alergeni","Products with alergens", IzpisiIzdelke);
         }
+
+
+
 
         private async void alergeni_list_Clicked(object sender, EventArgs e)
         {
@@ -61,7 +101,7 @@ namespace RMR_Projekt.Views
             moji_alergeni.Add(new Izdelek("https://i.pinimg.com/564x/ed/c0/06/edc006388218e2c6caff7a75a3263e34.jpg", "Molluscs"));
         }
 
-        private async void izberi_jezik(string slo,string eng,List<Izdelek> seznam)
+        private async void izberi_jezik(string slo,string eng,List<ProductInfo> seznam)
         {
             if(Preferences.Get("is_eng",false) == true)
             {

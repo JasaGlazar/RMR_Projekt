@@ -3,6 +3,7 @@ using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using RMR_Projekt.Data;
+using RMR_Projekt.Views;
 using System.Formats.Asn1;
 using System.Text;
 using ZXing.Aztec.Internal;
@@ -11,24 +12,23 @@ namespace RMR_Projekt;
 
 public partial class SeznamIzdelkov : ContentPage
 {
-    private List<Izdelek> moji_alergeni;
+    private List<ProductInfo> moji_alergeni;
     private string firebaseApiKey = "AIzaSyDjdAnxx_FBJ9nZzENatjoRKtH7K02sGNE";
 
-    public SeznamIzdelkov(string title, List<Izdelek> seznam_izdelkov)
+    public SeznamIzdelkov(string title, List<ProductInfo> seznam_izdelkov)
 	{
 		InitializeComponent();
       //list_izdelkov.ItemsSource = seznam_izdelkov.ToList();
 		moji_alergeni = seznam_izdelkov;
 		list_izdelkov.ItemsSource = moji_alergeni;
 		Title = title;
-
-        LoadUserPreferences();
     }
     public SeznamIzdelkov() 
 	{
         InitializeComponent();
     }
 
+    /*
     private async void Button_Clicked(object sender, EventArgs e)
     {
         var selectedAllergens = moji_alergeni.Where(item => item.IsSelected).Select(item => item.ime.ToLower()).ToList();
@@ -171,8 +171,9 @@ public partial class SeznamIzdelkov : ContentPage
         }
     }
 
-
-    /*private async Task<JObject> FetchUserData(string userEmail)
+    */
+    /*
+    private async Task<JObject> FetchUserData(string userEmail)
     {
         var firebaseUrl = "https://rmr-projekt-a8434-default-rtdb.europe-west1.firebasedatabase.app/";
         var endpoint = "PrijavljenUporabnik.json";
@@ -188,8 +189,9 @@ public partial class SeznamIzdelkov : ContentPage
 
             return userKey != null ? usersData[userKey] : null;
         }
-    }*/
-
+    }
+    */
+    /*
     private async void LoadUserPreferences()
     {
         var userAllergens = await PrijavljenUporabnikFirebase.VrniAlergene();
@@ -201,4 +203,5 @@ public partial class SeznamIzdelkov : ContentPage
 
         list_izdelkov.ItemsSource = moji_alergeni;
     }
+    */
 }
