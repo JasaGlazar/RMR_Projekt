@@ -11,6 +11,7 @@ namespace RMR_Projekt.Views
 			InitializeComponent();
             BindingContext = new ViewModels.ProfilePageViewModel(Navigation);
             pozdrav();
+            NaloziProfilno();
 
 		}
 
@@ -84,6 +85,7 @@ namespace RMR_Projekt.Views
 
                 // Set the source of the Image control
                 profile_picture.Source = filePath;
+                Preferences.Set("ProfilePic", filePath);
             }
         }
 
@@ -101,6 +103,11 @@ namespace RMR_Projekt.Views
 
                 username_lbl.Text = capitalizedFirstName;
             }
+        }
+
+        private void NaloziProfilno()
+        {
+            profile_picture.Source = Preferences.Get("ProfilePic"," ");
         }
     }
 }
