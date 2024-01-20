@@ -11,17 +11,31 @@ namespace RMR_Projekt.Views
 			InitializeComponent();
 		}
 
+        //Da se kamera prizge, tudi ce listamo med zavihki/page
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
+
+            StartCamera();
+        }
+
+        private void StartCamera()
+        {
+            if (cameraView.Cameras.Count > 0)
+            {
+                cameraView.Camera = cameraView.Cameras.First();
+                MainThread.BeginInvokeOnMainThread(async () => {
+                    await cameraView.StopCameraAsync();
+                    await cameraView.StartCameraAsync();
+                });
+            }
+        }
+
         private void cameraView_CamerasLoaded(object sender, EventArgs e)
         {
-			if (cameraView.Cameras.Count > 0)
-			{
-				cameraView.Camera = cameraView.Cameras.First();
-				MainThread.BeginInvokeOnMainThread(async () => { 
-					await cameraView.StopCameraAsync();
-					await cameraView.StartCameraAsync();
-				});
-			}
+            StartCamera();
         }
+
 
 
 
@@ -239,6 +253,7 @@ namespace RMR_Projekt.Views
 
     public class product
     {
+        public string product_name { get; set; }
         public List<string> allergens_hierarchy { get; set; }
         public string image_url { get; set; }
         public List<string> ingredients_hierarchy { get; set; }
