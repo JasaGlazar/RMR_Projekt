@@ -80,6 +80,9 @@ namespace RMR_Projekt.Views
                 product_image.Source = productInfo.product.image_url;
                 product_name.Text = productInfo.product.product_name;
                 alergeni_list.Clear();
+                Label l2 = new Label();
+                l2.Text = "Alergeni:";
+                alergeni_list.Add(l2);
                 foreach (string product in productInfo.product.allergens_hierarchy.ToList())
                 {
                     Label l = new Label();

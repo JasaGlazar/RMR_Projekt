@@ -28,10 +28,11 @@ namespace RMR_Projekt.Views
             }
             else
             {
-                {
-                    img_slo.BackgroundColor = Color.FromArgb("#a8ff93");
-                    img_eng.BackgroundColor = Color.FromRgba(0, 0, 0, 0);
-                }
+                
+                img_slo.BackgroundColor = Color.FromArgb("#a8ff93");
+                img_eng.BackgroundColor = Color.FromRgba(0, 0, 0, 0);
+
+            }
 
             }
         }
