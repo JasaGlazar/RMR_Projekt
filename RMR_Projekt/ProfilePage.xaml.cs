@@ -87,7 +87,7 @@ namespace RMR_Projekt.Views
             }
         }
 
-        private void pozdrav()
+        public void pozdrav()
         {
             var currentUser = Preferences.Get("PrijavaToken", " ");
             string currentEmail = PrijavljenUporabnikFirebase.GetUserEmailFromIdToken(currentUser);
