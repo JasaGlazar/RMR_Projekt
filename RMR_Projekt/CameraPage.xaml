@@ -22,10 +22,13 @@
                 <Label x:Name="product_name" TextColor="{DynamicResource label_color}" HorizontalOptions="CenterAndExpand"></Label>
                 <Label TextColor="{DynamicResource label_color}" HorizontalTextAlignment="Center">Alergeni:</Label>
                 <StackLayout x:Name="alergeni_list" HorizontalOptions="CenterAndExpand"></StackLayout>
+
+                <Mc:ChartView x:Name="chartView" BackgroundColor="{DynamicResource background}"  Background="{DynamicResource background}"/>
+
             </VerticalStackLayout>
         </ScrollView>
 
-        <Mc:ChartView x:Name="chartView" Grid.Row="2" />
+        
 
 
 
