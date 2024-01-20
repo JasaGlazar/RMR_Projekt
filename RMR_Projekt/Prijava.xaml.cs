@@ -17,6 +17,8 @@ public partial class Prijava : ContentPage
 
     private async void TapGestureRecognizer_Tapped(object sender, TappedEventArgs e)
     {
+        pass_entry.IsEnabled = false;
+        pass_entry.IsEnabled = true;
         await Navigation.PushModalAsync(new Registracija());
     }
     private void preveri_jezik()

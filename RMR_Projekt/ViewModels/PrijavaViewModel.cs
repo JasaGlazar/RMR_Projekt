@@ -55,6 +55,8 @@ namespace RMR_Projekt.ViewModels
         {
             FirebaseAuthProvider firebaseAuthProvider = new FirebaseAuthProvider(new FirebaseConfig(WebApiKey));
 
+            Preferences.Remove("PrijavaToken");
+
             try
             {
                 FirebaseAuthLink auth = await firebaseAuthProvider.SignInWithEmailAndPasswordAsync(Email, Geslo);
@@ -62,7 +64,11 @@ namespace RMR_Projekt.ViewModels
 
                 var serializiranaVsebina = JsonConvert.SerializeObject(vsebina);
                 Preferences.Set("PrijavaToken", serializiranaVsebina);
-                await this._navigation.PushModalAsync(new AppShell());
+
+                //Tu je error za ponovno prijavo
+                //await this._navigation.PushModalAsync(neke);
+
+                Application.Current.MainPage = new NavigationPage(new AppShell());
             }
             catch (FirebaseAuthException ex)
             {
