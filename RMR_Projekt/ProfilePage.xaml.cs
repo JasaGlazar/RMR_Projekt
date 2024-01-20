@@ -23,6 +23,12 @@ namespace RMR_Projekt.Views
 
 		}
 
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
+            NaloziProfilno();
+        }
+
         private void img_slo_Clicked(object sender, EventArgs e)
         {
             img_slo.BackgroundColor = Color.FromArgb("#a8ff93");
@@ -84,16 +90,21 @@ namespace RMR_Projekt.Views
                 // Get the stream of the selected image
                 var stream = await mediaFile.OpenReadAsync();
 
+                // Generate a unique file name
+                string uniqueFileName = Guid.NewGuid().ToString("N") + ".jpg";
+
                 // Save the stream to a file in the app's local storage
-                var filePath = Path.Combine(FileSystem.AppDataDirectory, "profile_picture.jpg");
+                var filePath = Path.Combine(FileSystem.AppDataDirectory, uniqueFileName);
                 using (var fileStream = File.OpenWrite(filePath))
                 {
                     await stream.CopyToAsync(fileStream);
                 }
 
                 // Set the source of the Image control
-                profile_picture.Source = filePath;
+                Preferences.Remove("ProfilePic");
                 Preferences.Set("ProfilePic", filePath);
+                profile_picture.Source = " ";
+                profile_picture.Source = filePath;
             }
         }
 
