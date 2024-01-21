@@ -27,7 +27,7 @@ namespace RMR_Projekt.Views
 
             List<ProductInfo> Items = await ProductInfoFirebase.VrniProductInfo();
 
-            List<string> barcodesBrezAlergenov = await PrijavljenUporabnikFirebase.VrniProdukteZAlergeni();
+            List<string> barcodesBrezAlergenov = await PrijavljenUporabnikFirebase.VrniProdukteBrezAlergenov();
 
             List<ProductInfo> IzpisiIzdelke = new List<ProductInfo>();
 
@@ -35,16 +35,9 @@ namespace RMR_Projekt.Views
             {
                 foreach (var Koda in barcodesBrezAlergenov)
                 {
-                    if (Izdelek.Code == "placeholder")
+                    if (Izdelek.Code == Koda && Koda != "placeholder")
                     {
-                        continue;
-                    }
-                    else
-                    {
-                        if (Izdelek.Code != Koda && Koda != "placeholder")
-                        {
-                            IzpisiIzdelke.Add(Izdelek);
-                        }
+                        IzpisiIzdelke.Add(Izdelek);
                     }
                 }
             }
@@ -66,16 +59,9 @@ namespace RMR_Projekt.Views
             {
                 foreach (var Koda in barcodesBrezAlergenov)
                 {
-                    if (Izdelek.Code == "placeholder")
+                    if (Izdelek.Code == Koda && Koda != "placeholder")
                     {
-                        continue;
-                    }
-                    else
-                    {
-                        if (Izdelek.Code == Koda)
-                        {
-                            IzpisiIzdelke.Add(Izdelek);
-                        }
+                        IzpisiIzdelke.Add(Izdelek);
                     }
                 }
             }
