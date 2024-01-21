@@ -135,7 +135,7 @@ namespace RMR_Projekt.Views
                 }
                 else
                 {
-                    await Console.Out.WriteLineAsync("lol");
+                    await PrijavljenUporabnikFirebase.DodajProduktBrezAlergenov(productInfo);
                 }
 
                 ProductInfoFirebase.POSTProductInfo(productInfo);

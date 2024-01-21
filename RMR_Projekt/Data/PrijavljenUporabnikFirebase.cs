@@ -148,6 +148,31 @@ namespace RMR_Projekt.Data
                 }
         }
 
+
+        public static async Task DodajProduktBrezAlergenov(ProductInfo productInfo)
+        {
+            string userEmail = GetUserEmailFromIdToken(loggedUserData);
+            if (!string.IsNullOrEmpty(userEmail))
+            {
+                var userData = await FetchUserData(userEmail);
+                if (userData != null)
+                {
+                    // Get the current list of products
+                    var currentProducts = userData["ProduktiBrez"].ToObject<List<string>>();
+
+                    // Add the new product code if it's not already in the list
+                    if (!currentProducts.Contains(productInfo.Code))
+                    {
+                        currentProducts.Add(productInfo.Code);
+                    }
+
+                    // Update the ProduktiZ property in the database
+                    userData["ProduktiBrez"] = JToken.FromObject(currentProducts);
+                    await UpdateUserData(userEmail, userData);
+                }
+            }
+        }
+
         private static async Task UpdateUserData(string userEmail, JObject userData)
         {
             var firebaseUrl = "https://rmr-projekt-a8434-default-rtdb.europe-west1.firebasedatabase.app/";
