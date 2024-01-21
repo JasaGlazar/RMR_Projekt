@@ -10,6 +10,11 @@ public partial class Prijava : ContentPage
         BindingContext = new ViewModels.PrijavaViewModel(Navigation);
     }
 
+    protected override void OnAppearing()
+    {
+        base.OnAppearing();
+    }
+
     private async void reg_btn_Clicked(object sender, EventArgs e)
     {
         await Navigation.PushModalAsync(new Registracija());

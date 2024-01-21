@@ -21,7 +21,7 @@
                 <Image x:Name="product_image" Aspect="Fill" WidthRequest="150" HeightRequest="150"/>
                 <Label x:Name="product_name" TextColor="{DynamicResource label_color}" HorizontalOptions="CenterAndExpand"></Label>
                 <StackLayout x:Name="alergeni_list" HorizontalOptions="CenterAndExpand"></StackLayout>
-                <Button Text="JasasPP" Clicked="Button_Clicked"></Button>
+                <Button Text="Scan" Clicked="Button_Clicked"></Button>
             </VerticalStackLayout>
         </ScrollView>
 
