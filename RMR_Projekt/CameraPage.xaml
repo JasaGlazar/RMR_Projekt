@@ -10,6 +10,7 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="250"/>
             <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
         <cv:CameraView x:Name="cameraView" WidthRequest="300" HeightRequest="200" CamerasLoaded="cameraView_CamerasLoaded" BarCodeDetectionEnabled="True" BarcodeDetected="cameraView_BarcodeDetected">
@@ -20,11 +21,12 @@
                 <Image x:Name="product_image" Aspect="Fill" WidthRequest="150" HeightRequest="150"/>
                 <Label x:Name="product_name" TextColor="{DynamicResource label_color}" HorizontalOptions="CenterAndExpand"></Label>
                 <StackLayout x:Name="alergeni_list" HorizontalOptions="CenterAndExpand"></StackLayout>
-                <Mc:ChartView x:Name="chartView" BackgroundColor="{DynamicResource background}"  Background="{DynamicResource background}"/>
-
                 <Button Text="JasasPP" Clicked="Button_Clicked"></Button>
             </VerticalStackLayout>
         </ScrollView>
 
+        <Mc:ChartView Grid.Row="2" x:Name="chartView"/>
+        
+        
     </Grid>
 </ContentPage>

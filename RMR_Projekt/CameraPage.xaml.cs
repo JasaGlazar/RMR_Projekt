@@ -131,11 +131,12 @@ namespace RMR_Projekt.Views
 
                 if(SeAlergeniUjemajo)
                 {
-                   await PrijavljenUporabnikFirebase.DodajProduktZAlergeni(productInfo);
+                    await PrijavljenUporabnikFirebase.DodajProduktZAlergeni(productInfo);
+                    await DisplayAlert("Ujemanje","Alergeni produkta se ujemajo z nastavljenimi preferencami!","Zaperi");
                 }
                 else
                 {
-                    await PrijavljenUporabnikFirebase.DodajProduktBrezAlergenov(productInfo);
+                    await DisplayAlert("Ne-Ujemanje", "Izdelek je varen za uporabo!", "Zaperi");
                 }
 
                 ProductInfoFirebase.POSTProductInfo(productInfo);
@@ -197,7 +198,9 @@ namespace RMR_Projekt.Views
 
         private async void Button_Clicked(object sender, EventArgs e)
         {
-            /* string apiPath = "https://world.openfoodfacts.org/api/v2/product/";
+
+            /*
+             string apiPath = "https://world.openfoodfacts.org/api/v2/product/";
              //var number = barcodeResult.Text.Trim();
              var numberTest = "8000500357729";
 
@@ -282,6 +285,7 @@ namespace RMR_Projekt.Views
                  };
 
 
+                 
                  using (HttpClient client = new HttpClient())
                  {
                      // Convert ProductInfo to JSON
@@ -311,15 +315,19 @@ namespace RMR_Projekt.Views
                          // Handle the error
                          Console.WriteLine($"Error: {response.StatusCode} - {response.ReasonPhrase}");
                      }
+                    
                  }
+                
              }
              else
              {
                  // Handle the case where JSON is not available or invalid
                  Console.WriteLine("Failed to fetch valid JSON data.");
-             }*/
+             }
+            
+           */
 
-           ApiCall("8000500357729");
+            ApiCall("5449000214911");
 
         }
 
