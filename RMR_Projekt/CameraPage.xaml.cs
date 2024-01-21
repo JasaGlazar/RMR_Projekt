@@ -136,6 +136,7 @@ namespace RMR_Projekt.Views
                 }
                 else
                 {
+                    await PrijavljenUporabnikFirebase.DodajProduktBrezAlergenov(productInfo);
                     await DisplayAlert("Ne-Ujemanje", "Izdelek je varen za uporabo!", "Zaperi");
                 }
 
