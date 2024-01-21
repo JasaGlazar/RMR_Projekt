@@ -132,12 +132,12 @@ namespace RMR_Projekt.Views
                 if(SeAlergeniUjemajo)
                 {
                     await PrijavljenUporabnikFirebase.DodajProduktZAlergeni(productInfo);
-                    await DisplayAlert("Ujemanje","Alergeni produkta se ujemajo z nastavljenimi preferencami!","Zaperi");
+                    await DisplayAlert("Ujemanje","Alergeni produkta se ujemajo z nastavljenimi preferencami!","OK");
                 }
                 else
                 {
                     await PrijavljenUporabnikFirebase.DodajProduktBrezAlergenov(productInfo);
-                    await DisplayAlert("Ne-Ujemanje", "Izdelek je varen za uporabo!", "Zaperi");
+                    await DisplayAlert("Ne-Ujemanje", "Izdelek je varen za uporabo!", "OK");
                 }
 
                 ProductInfoFirebase.POSTProductInfo(productInfo);
@@ -328,7 +328,7 @@ namespace RMR_Projekt.Views
             
            */
 
-            ApiCall("5449000214911");
+            ApiCall("3017620422003");
 
         }
 
