@@ -35,9 +35,16 @@ namespace RMR_Projekt.Views
             {
                 foreach (var Koda in barcodesBrezAlergenov)
                 {
-                    if (Izdelek.Code != Koda && Izdelek.Code != "placeholder")
+                    if (Izdelek.Code == "placeholder")
                     {
-                        IzpisiIzdelke.Add(Izdelek);
+                        continue;
+                    }
+                    else
+                    {
+                        if (Izdelek.Code != Koda && Koda != "placeholder")
+                        {
+                            IzpisiIzdelke.Add(Izdelek);
+                        }
                     }
                 }
             }
@@ -59,9 +66,16 @@ namespace RMR_Projekt.Views
             {
                 foreach (var Koda in barcodesBrezAlergenov)
                 {
-                    if (Izdelek.Code == Koda && Izdelek.Code != "placeholder")
+                    if (Izdelek.Code == "placeholder")
                     {
-                        IzpisiIzdelke.Add(Izdelek);
+                        continue;
+                    }
+                    else
+                    {
+                        if (Izdelek.Code == Koda)
+                        {
+                            IzpisiIzdelke.Add(Izdelek);
+                        }
                     }
                 }
             }
