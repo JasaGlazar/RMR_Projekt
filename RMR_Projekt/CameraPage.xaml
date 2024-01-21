@@ -25,7 +25,7 @@
             </VerticalStackLayout>
         </ScrollView>
 
-        <Mc:ChartView Grid.Row="2" x:Name="chartView"/>
+        <Mc:ChartView Grid.Row="2" x:Name="chartView" BackgroundColor="{DynamicResource background}"/>
         
         
     </Grid>

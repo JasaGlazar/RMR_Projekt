@@ -81,6 +81,7 @@ namespace RMR_Projekt.Views
                 product_name.Text = productInfo.product.product_name;
                 alergeni_list.Clear();
                 Label l2 = new Label();
+                l2.SetDynamicResource(Label.TextColorProperty, "label_color");
                 l2.Text = "Alergeni:";
                 alergeni_list.Add(l2);
                 foreach (string product in productInfo.product.allergens_hierarchy.ToList())
